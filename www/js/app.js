@@ -4,7 +4,6 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCordova', 'angular.filter']);
-
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, $Auth) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -16,7 +15,6 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 StatusBar.styleDefault();
             }
         });
-
         $rootScope.$on('$stateChangeStart', function (event, next) {
             if (next.access !== undefined) {
                 if ((next.access.requiresLogin && !$Auth.signedIn()) || (!next.access.requiresLogin && $Auth.signedIn())) {
@@ -25,51 +23,50 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
     }])
-        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-                $stateProvider
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('app', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
 
-                        .state('app', {
-                            url: "/app",
-                            abstract: true,
-                            templateUrl: "templates/menu.html",
-                            controller: 'AppCtrl'
-                        })
+        .state('app.main', {
+            url: "/main",
+            access: {
+                requiresLogin: true,
+                /*requiredPermissions: ['Admin', 'UserManager'],
+                 permissionType: 'AtLeastOne'*/
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/main.html",
+                    controller: 'MainCtrl',
+                }
+            }
+        })
 
-                        .state('app.dashboard', {
-                            url: "/dashboard",
-                            access: {
-                                requiresLogin: true,
-                                /*requiredPermissions: ['Admin', 'UserManager'],
-                                 permissionType: 'AtLeastOne'*/
-                            },
-                            views: {
-                                'menuContent': {
-                                    templateUrl: "templates/dashboard.html",
-                                    controller: 'DashCtrl',
-                                }
-                            }
-                        })
-
-                        .state('login', {
-                            url: "/login",
-                            templateUrl: "templates/login.html",
-                            controller: 'AuthCtrl',
-                            access: {
-                                requiresLogin: false
-                            }
-                        })
-                        .state('signup', {
-                            url: "/signup",
-                            templateUrl: "templates/signup.html",
-                            controller: 'AuthCtrl',
-                            access: {
-                                requiresLogin: false
-                            }
-                        });
-                // if none of the above states are matched, use this as the fallback
-                $urlRouterProvider.otherwise('/app/dashboard');
+        .state('login', {
+                url: "/login",
+                templateUrl: "templates/login.html",
+                controller: 'AuthCtrl',
+                access: {
+                    requiresLogin: false
+                }
+            })
+            .state('signup', {
+                url: "/signup",
+                templateUrl: "templates/signup.html",
+                controller: 'AuthCtrl',
+                access: {
+                    requiresLogin: false
+                }
+            });
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/main');
 
             }])
-        .constant('moment', moment)
+    .constant('moment', moment)
 
-        .constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');
+.constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');

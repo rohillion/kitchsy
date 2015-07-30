@@ -3,14 +3,15 @@
 
 kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', function ($scope, $location, Auth) {
         if (Auth.signedIn()) {
-            $location.path('/dashboard');
+            console.log('pasa');
+            $location.path('/main');
         }
         
         $scope.user = {};
 
         $scope.login = function () {
             Auth.login($scope.user).then(function () {
-                $location.path('/dashboard');
+                $location.path('/main');
             });
         };
 
@@ -22,7 +23,7 @@ kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', function ($scope,
                             return Auth.createProfile(user);
                         })
                         .then(function () {
-                            $location.path('/dashboard');
+                            $location.path('/main');
                         });
             }, function (error) {
                 $scope.error = error.toString();

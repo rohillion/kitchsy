@@ -1,4 +1,4 @@
-agendoctor.directive('timeline', function() {
+kitchsy.directive('timeline', function() {
     return {
         restrict: 'E',
         replace: true,

@@ -1,4 +1,4 @@
-agendoctor.directive('event', function() {
+kitchsy.directive('event', function() {
   return {
     restrict: 'E',
     replace: true,

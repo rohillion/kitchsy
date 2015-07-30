@@ -1,4 +1,4 @@
-/*global agendoctor, angular, Firebase */
+/*global kitchsy, angular, Firebase */
 'use strict';
 
 /**
@@ -6,7 +6,7 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-agendoctor.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'Auth', function ($firebaseArray, $firebaseObject, FIREBASE_URL,Auth) {
+kitchsy.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'Auth', function ($firebaseArray, $firebaseObject, FIREBASE_URL,Auth) {
         var ref = new Firebase(FIREBASE_URL);
         //var events = $firebaseArray(ref.child('events').orderByChild("deletedAt").equalTo(false));
         var events = $firebaseArray(ref.child('events').orderByChild("authorUID").equalTo(Auth.user.uid));

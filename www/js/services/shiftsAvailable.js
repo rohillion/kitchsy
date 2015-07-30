@@ -1,4 +1,4 @@
-/*global agendoctor, angular, Firebase */
+/*global kitchsy, angular, Firebase */
 'use strict';
 
 /**
@@ -6,7 +6,7 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-agendoctor.factory('ShiftsAvailable', ['moment', function (moment) {
+kitchsy.factory('ShiftsAvailable', ['moment', function (moment) {
     
         var allShifts, shiftsAvailable = [], nextShift, shiftMinutes = 30;
     
