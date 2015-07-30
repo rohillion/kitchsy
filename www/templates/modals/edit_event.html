@@ -1,0 +1,40 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <button class="button button-icon button-clear ion-android-close" ng-click="editEventModalClose()">
+        </button>
+        <h3 class="title">{{event.eventDate}}</h3>
+        <button class="button button-icon button-clear ion-android-delete" ng-click="deleteEvent()">
+        </button>
+    </ion-header-bar>
+
+    <ion-content>
+        <form id="topic-form">
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Patient Name</span>
+                    <input type="text" placeholder="John Doe" ng-model="event.title">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Motive</span>
+                    <select>
+                        <option>Revision</option>
+                        <option>Aesthetic</option>
+                        <option>Implantology</option>
+                        <option>Endodontics</option>
+                        <option>Prosthesis</option>
+                        <option>Orthodontics</option>
+                        <option>Periodontology</option>
+                        <option>Surgery</option>
+                    </select>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Observations</span>
+                    <input type="text" placeholder="Patient needs a revision.." ng-model="event.description">
+                </label>
+            </div>
+        </form>
+    </ion-content>
+    <div class="bar bar-footer bar-calm" ng-click="saveEvent()">
+        <div class="title"><i class="icon ion-checkmark"></i></div>
+    </div>
+</ion-modal-view>

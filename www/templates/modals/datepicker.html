@@ -1,0 +1,54 @@
+<ion-modal-view view-title="Dashboard">
+    <ion-header-bar>
+        
+        <button class="button button-icon button-clear" ng-class="{'ion-android-close': datePickerModalSlider.currentIndex() == 0, 'ion-ios-arrow-left' : datePickerModalSlider.currentIndex() > 0}" ng-click="closeDatePicker()"></button>
+        
+        <h3 class="title">{{newEventShift}} {{appointmentDateFormated}}</h3>
+    </ion-header-bar>
+    
+    <ion-content delegate-handle="datepickerModalContent">
+        
+        <ion-slide-box delegate-handle="modalSlider" show-pager="false">
+            
+          <ion-slide class="padding">
+            <ul class="list">
+                <li style="text-align:center;" class="item" ng-repeat="shift in shifts['monday']" ng-click="selectShift(shift)">{{shift}}</li>
+            </ul>
+          </ion-slide>
+            
+          <ion-slide class="padding">
+            <form id="appointment-form" style="margin-top:{{scrollFix}}px;">
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Patient Name</span>
+                        <input type="text" placeholder="John Doe" ng-model="appointment.title">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Motive</span>
+                        <select>
+                            <option>Revision</option>
+                            <option>Aesthetic</option>
+                            <option>Implantology</option>
+                            <option>Endodontics</option>
+                            <option>Prosthesis</option>
+                            <option>Orthodontics</option>
+                            <option>Periodontology</option>
+                            <option>Surgery</option>
+                        </select>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Observations</span>
+                        <input type="text" placeholder="Patient needs a revision.." ng-model="appointment.description">
+                    </label>
+                </div>
+            </form>
+          </ion-slide>
+            
+        </ion-slide-box>
+        
+    </ion-content>
+    <div ng-show="datePickerModalSlider.currentIndex() > 0" class="bar bar-footer bar-calm" ng-click="addEvent()">
+        <div class="title"><i class="icon ion-checkmark"></i></div>
+    </div>
+        
+</ion-modal-view>

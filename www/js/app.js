@@ -3,71 +3,73 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCordova', 'angular.filter']);
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, $Auth) {
+        $ionicPlatform.ready(function () {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+        });
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+            if (next.access !== undefined) {
+                if ((next.access.requiresLogin && !$Auth.signedIn()) || (!next.access.requiresLogin && $Auth.signedIn())) {
+                    event.preventDefault();
+                }
+            }
+        });
+    }])
+        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+                $stateProvider
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+                        .state('app', {
+                            url: "/app",
+                            abstract: true,
+                            templateUrl: "templates/menu.html",
+                            controller: 'AppCtrl'
+                        })
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
+                        .state('app.dashboard', {
+                            url: "/dashboard",
+                            access: {
+                                requiresLogin: true,
+                                /*requiredPermissions: ['Admin', 'UserManager'],
+                                 permissionType: 'AtLeastOne'*/
+                            },
+                            views: {
+                                'menuContent': {
+                                    templateUrl: "templates/dashboard.html",
+                                    controller: 'DashCtrl',
+                                }
+                            }
+                        })
 
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
+                        .state('login', {
+                            url: "/login",
+                            templateUrl: "templates/login.html",
+                            controller: 'AuthCtrl',
+                            access: {
+                                requiresLogin: false
+                            }
+                        })
+                        .state('signup', {
+                            url: "/signup",
+                            templateUrl: "templates/signup.html",
+                            controller: 'AuthCtrl',
+                            access: {
+                                requiresLogin: false
+                            }
+                        });
+                // if none of the above states are matched, use this as the fallback
+                $urlRouterProvider.otherwise('/app/dashboard');
 
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
+            }])
+        .constant('moment', moment)
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
-});
+        .constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');
