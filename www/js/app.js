@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCordova', 'angular.filter']);
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCordova', 'angular.filter', 'pascalprecht.translate']);
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, $Auth) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,7 +23,38 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
     }])
-    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function ($stateProvider, $urlRouterProvider, $translateProvider) {
+
+        $translateProvider.determinePreferredLanguage(function () {
+            $translateProvider.translations('en', {
+                'CHANGE_CITY': 'Events from ',
+                'LOGOUT': 'Logout'
+            });
+
+            $translateProvider.translations('de', {
+                'TITLE': 'Hallo',
+                'FOO': 'Dies ist ein Absatz'
+            });
+
+            $translateProvider.use('en');
+
+            console.log(navigator.language);
+            console.log(navigator.userLanguage);
+            console.log($translateProvider.use());
+        });
+
+        /*$translateProvider.translations('en', {
+            'CHANGE_CITY': 'Events from ',
+            'LOGOUT': 'Logout'
+        });
+
+        $translateProvider.translations('de', {
+            'TITLE': 'Hallo',
+            'FOO': 'Dies ist ein Absatz'
+        });
+
+        $translateProvider.preferredLanguage('en');*/
+
         $stateProvider
             .state('app', {
                 url: "/app",

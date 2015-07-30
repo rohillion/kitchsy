@@ -9,6 +9,7 @@
     "angularfire": "~1.1.2",
     "firebase": "~2.2.8",
     "angular-filter": "~0.5.4",
-    "ngCordova": "~0.1.17-alpha"
+    "ngCordova": "~0.1.17-alpha",
+    "angular-translate": "~2.7.2"
   }
 }
