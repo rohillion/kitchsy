@@ -3,8 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCordova', 'angular.filter', 'pascalprecht.translate']);
-kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, $Auth) {
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate']);
+
+kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, Auth) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -14,10 +15,20 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+            // get preferred Laguage from device
+            if (typeof navigator.globalization !== "undefined") {
+                navigator.globalization.getPreferredLanguage(function (language) {
+                    $translate.use((language.value).split("-")[0]).then(function (data) {
+                        console.log("SUCCESS -> " + data);
+                    }, function (error) {
+                        console.log("ERROR -> " + error);
+                    });
+                }, null);
+            }
         });
         $rootScope.$on('$stateChangeStart', function (event, next) {
             if (next.access !== undefined) {
-                if ((next.access.requiresLogin && !$Auth.signedIn()) || (!next.access.requiresLogin && $Auth.signedIn())) {
+                if ((next.access.requiresLogin && !Auth.signedIn()) || (!next.access.requiresLogin && Auth.signedIn())) {
                     event.preventDefault();
                 }
             }
@@ -25,35 +36,10 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
     }])
     .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function ($stateProvider, $urlRouterProvider, $translateProvider) {
 
-        $translateProvider.determinePreferredLanguage(function () {
-            $translateProvider.translations('en', {
-                'CHANGE_CITY': 'Events from ',
-                'LOGOUT': 'Logout'
-            });
-
-            $translateProvider.translations('de', {
-                'TITLE': 'Hallo',
-                'FOO': 'Dies ist ein Absatz'
-            });
-
-            $translateProvider.use('en');
-
-            console.log(navigator.language);
-            console.log(navigator.userLanguage);
-            console.log($translateProvider.use());
-        });
-
-        /*$translateProvider.translations('en', {
-            'CHANGE_CITY': 'Events from ',
-            'LOGOUT': 'Logout'
-        });
-
-        $translateProvider.translations('de', {
-            'TITLE': 'Hallo',
-            'FOO': 'Dies ist ein Absatz'
-        });
-
-        $translateProvider.preferredLanguage('en');*/
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'lang/locale-',
+            suffix: '.json'
+        }).preferredLanguage('en').fallbackLanguage("en").useLocalStorage();
 
         $stateProvider
             .state('app', {
@@ -99,5 +85,4 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
 
             }])
     .constant('moment', moment)
-
-.constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');
+    .constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');

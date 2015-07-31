@@ -1,6 +1,6 @@
 {
   "name": "kitchsy",
-  "app_id": "",
+  "app_id": "2635be5b",
   "gulpStartupTasks": [
     "sass",
     "watch"

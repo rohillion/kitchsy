@@ -25,10 +25,13 @@
         <ion-content>
             <ion-list>
                 <ion-item menu-close href="#/app/search">
-                    Seeing events from Dublin
+                    {{ 'CHANGE_CITY' | translate }}
+                </ion-item>
+                <ion-item ng-click="lang()">
+                    {{ 'CHANGE_LANG' | translate }}
                 </ion-item>
                 <ion-item menu-close ng-click="logout()">
-                    Logout
+                    {{ 'LOGOUT' | translate }}
                 </ion-item>
             </ion-list>
         </ion-content>
