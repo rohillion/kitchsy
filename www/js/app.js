@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate']);
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule']);
 
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, Auth) {
         $ionicPlatform.ready(function () {
@@ -34,12 +34,16 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
     }])
-    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider) {
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/locale-',
             suffix: '.json'
         }).preferredLanguage('en').fallbackLanguage("en").useLocalStorage();
+        
+        localStorageServiceProvider
+            .setPrefix('kitchsy')
+            .setNotify(true, true);
 
         $stateProvider
             .state('app', {
@@ -49,8 +53,8 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 controller: 'AppCtrl'
             })
 
-        .state('app.main', {
-            url: "/main",
+        .state('app.events', {
+            url: "/events",
             access: {
                 requiresLogin: true,
                 /*requiredPermissions: ['Admin', 'UserManager'],
@@ -58,8 +62,23 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/main.html",
-                    controller: 'MainCtrl',
+                    templateUrl: "templates/events.html",
+                    controller: 'EventListCtrl',
+                }
+            }
+        })
+            
+        .state('app.cities', {
+            url: "/cities",
+            access: {
+                requiresLogin: true,
+                /*requiredPermissions: ['Admin', 'UserManager'],
+                 permissionType: 'AtLeastOne'*/
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/cities.html",
+                    controller: 'CityListCtrl',
                 }
             }
         })
@@ -81,7 +100,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/main');
+        $urlRouterProvider.otherwise('/app/events');
 
             }])
     .constant('moment', moment)

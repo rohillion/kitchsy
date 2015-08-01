@@ -13,4 +13,8 @@ kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$tran
         $scope.lang = function(){
             $translate.use($translate.use() === 'en' ? 'es' : 'en');
         };
+    
+        $scope.logout = function(){
+            Auth.logout();
+        };
     }]);

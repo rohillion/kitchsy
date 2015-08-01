@@ -21,6 +21,7 @@
         <script src="lib/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
         <script src="lib/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
         <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+        <script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
         
         <!-- plugin dependencies -->
         <script src="lib/moment/min/moment.min.js"></script>
@@ -34,13 +35,15 @@
 
         <!-- services -->
         <script src="js/services/auth.js"></script>
+        <script src="js/services/profile.js"></script>
         
         <!-- directives -->
 
         <!-- controllers -->
         <script src="js/controllers/AppCtrl.js"></script>
         <script src="js/controllers/AuthCtrl.js"></script>
-        <script src="js/controllers/MainCtrl.js"></script>
+        <script src="js/controllers/EventListCtrl.js"></script>
+        <script src="js/controllers/CityListCtrl.js"></script>
     </head>
     <body ng-app="kitchsy">
         <ion-nav-view></ion-nav-view>

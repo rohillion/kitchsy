@@ -9,12 +9,6 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
         register: function (user) {
             return auth.$createUser(user);
         },
-        createProfile: function (user) {
-            var profile = {
-                username: user.username
-            };
-            return ref.child('profile').child(user.uid).set(profile);
-        },
         login: function (user) {
             return auth.$authWithPassword(user);
         },
