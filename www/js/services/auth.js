@@ -35,7 +35,7 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
                 Auth.user.profile.$destroy();
             }
             angular.copy({}, Auth.user);
-            $location.path('/login');
+            $location.path('/auth');
         }
     });
 

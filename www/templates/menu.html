@@ -24,7 +24,7 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close href="#/app/cities">
+                <ion-item menu-close ng-click="changeCity()">
                     {{ 'CHANGE_CITY' | translate }}
                 </ion-item>
                 <ion-item ng-click="lang()">

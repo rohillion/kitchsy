@@ -40,18 +40,17 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             prefix: 'lang/locale-',
             suffix: '.json'
         }).preferredLanguage('en').fallbackLanguage("en").useLocalStorage();
-        
+
         localStorageServiceProvider
             .setPrefix('kitchsy')
             .setNotify(true, true);
 
-        $stateProvider
-            .state('app', {
-                url: "/app",
-                abstract: true,
-                templateUrl: "templates/menu.html",
-                controller: 'AppCtrl'
-            })
+        $stateProvider.state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'AppCtrl'
+        })
 
         .state('app.events', {
             url: "/events",
@@ -67,7 +66,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-            
+
         .state('app.cities', {
             url: "/cities",
             access: {
@@ -82,23 +81,24 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
+        
+        .state('profile', {
+            url: "/profile",
+            templateUrl: "templates/profile.html",
+            controller: 'ProfileCtrl',
+            access: {
+                requiresLogin: true
+            }
+        })
 
-        .state('login', {
-                url: "/login",
-                templateUrl: "templates/login.html",
-                controller: 'AuthCtrl',
-                access: {
-                    requiresLogin: false
-                }
-            })
-            .state('signup', {
-                url: "/signup",
-                templateUrl: "templates/signup.html",
-                controller: 'AuthCtrl',
-                access: {
-                    requiresLogin: false
-                }
-            });
+        .state('auth', {
+            url: "/auth",
+            templateUrl: "templates/auth.html",
+            controller: 'AuthCtrl',
+            access: {
+                requiresLogin: false
+            }
+        });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/events');
 

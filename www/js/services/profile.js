@@ -17,7 +17,7 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
             all: profiles,
             create: function (user) {
                 var profile = {
-                    username: user.username
+                    city: user.city
                 };
                 Profile.set(user.uid, profile);
                 return ref.child('profiles').child(user.uid).set(profile);

@@ -1,0 +1,62 @@
+<ion-modal-view view-title="Accounts">
+    <!-- TODO. Lang support -->
+    <ion-header-bar>
+        <h3 class="title"></h3>
+        <button class="button button-icon button-clear ion-android-close" ng-click="closeLoginSignupModal()"></button>
+    </ion-header-bar>
+
+    <ion-content delegate-handle="loginSignupModalContent">
+
+        <ion-slide-box delegate-handle="loginSignupModalSlider" show-pager="false">
+
+            <ion-slide class="padding">
+                <form ng-submit="login()">
+                    <div class="list">
+                        <label class="item item-input">
+                            <span class="input-label">Username</span>
+                            <input type="text" ng-model="user.email">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Password</span>
+                            <input type="password" ng-model="user.password">
+                        </label>
+                        <label class="item">
+                            <button class="button button-block button-positive" type="submit">Login</button>
+                        </label>
+                        <div class="item item-input">
+                            <a ng-click="loginSignupModalSlider.slide(1)">Signup</a>
+                        </div>
+                    </div>
+                </form>
+            </ion-slide>
+
+            <ion-slide class="padding">
+                <form ng-submit="signup()">
+                    <div class="list">
+                        <label class="item item-input">
+                            <span class="input-label">City</span>
+                            <input type="text" ng-model="user.city">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Email</span>
+                            <input type="email" ng-model="user.email">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Password</span>
+                            <input type="password" ng-model="user.password">
+                        </label>
+                        <label class="item">
+                            <button class="button button-block button-positive" type="submit">Signup</button>
+                        </label>
+                        <div class="item item-input">
+                            <a ng-click="loginSignupModalSlider.slide(0)">Login</a>
+                        </div>
+                    </div>
+                </form>
+            </ion-slide>
+
+        </ion-slide-box>
+
+    </ion-content>
+
+</ion-modal-view>

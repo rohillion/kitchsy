@@ -1,0 +1,62 @@
+<ion-modal-view view-title="Profile">
+    <!-- TODO. Lang support -->
+    <ion-header-bar>
+
+        <button class="button button-icon button-clear ion-ios-arrow-left" ng click="$scope.afterSignupModalSlider.previous()" ng-show="afterSignupModalSlider.currentIndex() > 0"></button>
+        <h3 class="title">Whatever</h3>
+    </ion-header-bar>
+
+    <ion-content delegate-handle="afterSignupModalContent">
+
+        <ion-slide-box delegate-handle="afterSignupModalSlider" show-pager="false">
+
+            <ion-slide class="padding">
+                <form id="profile-form">
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Name</span>
+                            <input type="text" placeholder="John Doe" ng-model="profile.name">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Username</span>
+                            <input type="text" placeholder="johndoe" ng-model="profile.username">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Are you a chef?</span>
+                            <select>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </label>
+                    </div>
+                </form>
+            </ion-slide>
+
+            <ion-slide class="padding">
+                <form id="chef-form">
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Are you available to cook at a client's house?</span>
+                            <select>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">What kind of food do you like to cook?</span>
+                            Tag Selection box
+                        </label>
+                    </div>
+                </form>
+            </ion-slide>
+
+        </ion-slide-box>
+
+    </ion-content>
+    <div ng-show="afterSignupModalSlider.currentIndex() > 0" class="bar bar-footer bar-calm" ng-click="saveProfile()">
+        <div class="title">
+            <i class="icon ion-checkmark"></i>
+        </div>
+    </div>
+
+</ion-modal-view>
