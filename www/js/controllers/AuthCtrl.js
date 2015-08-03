@@ -1,8 +1,8 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ionicModal', '$ionicSlideBoxDelegate', function AuthCtrl($scope, $location, Auth, Profile, $ionicModal, $ionicSlideBoxDelegate) {
-    
+kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicHistory', function AuthCtrl($scope, $location, Auth, Profile, $ionicModal, $ionicSlideBoxDelegate, $ionicHistory) {
+    //$ionicHistory.clearCache();
     if (Auth.signedIn()) {
         $location.path('/events');
     }

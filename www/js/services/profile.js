@@ -7,58 +7,68 @@
  * - exposes the model to the template and provides profile handlers
  */
 kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'localStorageService', '$q', function ($firebaseArray, $firebaseObject, FIREBASE_URL, localStorageService, $q) {
-    
-        var ref = new Firebase(FIREBASE_URL);
-        var profiles = $firebaseArray(ref.child('profiles').orderByChild("deletedAt").equalTo(false));
-        //var profiles = $firebaseArray(ref.child('profiles').orderByChild("createdAt").equalTo(Auth.user.uid));
-        
 
-        var Profile = {
-            all: profiles,
-            create: function (user) {
-                var profile = {
-                    city: user.city
-                };
-                Profile.set(user.uid, profile);
-                return ref.child('profiles').child(user.uid).set(profile);
-            },
-            edit: function (input) {
-                var profile = ref.child('profiles').child(input.key)
-                profile.child("title").set(input.title);
-                profile.child("description").set(input.description);
-                Profile.set(user.uid, profile);
-                return profile;
-            },
-            get: function (userID) {
-                
-                return $q(function(resolve, reject) {
-                    
-                    var profile = localStorageService.get(userID);
-                    if(!profile)
-                    {
-                        $firebaseObject(ref.child('profiles').child(userID)).$loaded(function(profile){
-                            console.log('firebase');
-                            Profile.set(userID, profile);
-                            resolve(profile);
-                        });
-                    }
+    var ref = new Firebase(FIREBASE_URL);
+    //var profiles = $firebaseArray(ref.child('profiles').orderByChild("deletedAt").equalTo(false));
+    //var profiles = $firebaseArray(ref.child('profiles').orderByChild("createdAt").equalTo(Auth.user.uid));
+
+
+    var Profile = {
+        //all: profiles,
+        create: function (user) {
+            var profile = {
+                city: user.city
+            };
+            Profile.set(user.uid, profile);
+            return ref.child('profiles').child(user.uid).set(profile);
+        },
+        edit: function (input) {
+            var profile = ref.child('profiles').child(input.id);
+
+            return $q(function (resolve, reject) {
+
+                return profile.update(input, function (error) {
+                    if (error) {
+                        console.log('Synchronization failed');
+                        reject('Synchronization failed');
+                    } 
                     else {
-                        console.log('cache');
-                        resolve(profile);
+                        Profile.set(input.id, input);
+                        console.log('Synchronization succeeded');
+                        resolve(input);
                     }
-                  });
-                
-            },
-            set: function(userID, profile){
-                return localStorageService.set(userID, profile);
-            },
-            delete: function (userID) {
-                localStorageService.remove(userID);
-                return ref.child('profiles')
-                            .child(userID)
-                            .child("deletedAt").set(Math.floor(Date.now() / 1000));
-            }
-        };
+                });
 
-        return Profile;
+            });
+        },
+        get: function (userID) {
+
+            return $q(function (resolve, reject) {
+
+                var profile = localStorageService.get(userID);
+                if (!profile) {
+                    $firebaseObject(ref.child('profiles').child(userID)).$loaded(function (profile) {
+                        console.log('firebase');
+                        Profile.set(userID, profile);
+                        resolve(profile);
+                    });
+                } else {
+                    console.log('cache');
+                    resolve(profile);
+                }
+            });
+
+        },
+        set: function (userID, profile) {
+            return localStorageService.set(userID, profile);
+        },
+        delete: function (userID) {
+            localStorageService.remove(userID);
+            return ref.child('profiles')
+                .child(userID)
+                .child("deletedAt").set(Math.floor(Date.now() / 1000));
+        }
+    };
+
+    return Profile;
     }]);

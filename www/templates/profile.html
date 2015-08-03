@@ -6,24 +6,34 @@
     </ion-header-bar>
 
     <ion-content>
-
         <form id="profile-form">
             <div class="list">
 
-                <label class="item item-input item-stacked-label">
+                <label style="border-top:none;" class="item item-input item-stacked-label">
                     <span class="input-label">Name</span>
-                    <input type="text" placeholder="John Doe" ng-model="profile.name">
+                    <input type="text" placeholder="John Doe" ng-model="$parent.profile.name">
                 </label>
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Username</span>
-                    <input type="text" placeholder="johndoe" ng-model="profile.username">
+                    <input type="text" placeholder="johndoe" ng-model="$parent.profile.username">
                 </label>
 
                 <div class="item item-toggle">
-                    I'm a Chef
+                    I'm a Chef {{ischef}}
                     <label class="toggle">
-                        <input type="checkbox">
+                        <input type="checkbox" ng-model="$parent.profile.isChef">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <div ng-show="$parent.profile.isChef" class="item item-toggle">
+                    I'm available to cook at the
+                    <br>client's house
+                    <label class="toggle">
+                        <input type="checkbox" ng-model="$parent.profile.isHomeAvailable">
                         <div class="track">
                             <div class="handle"></div>
                         </div>
@@ -33,5 +43,11 @@
             </div>
         </form>
     </ion-content>
+    
+    <div class="padding stick-to-bottom">
+        <button ng-click="save()" ng-disabled="!profile.name || !profile.username" class="button button-block button-flat button-beige">
+            <i class="icon ion-checkmark"></i>
+        </button>
+    </div>
 
 </ion-view>

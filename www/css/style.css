@@ -1,1 +1,27 @@
 /* Empty. Add your own CSS if you like */
+
+/* OVERWRITES */
+.bar.bar-calm {
+    border-color: inherit;
+    background-color: #84BDAC;
+    background-image: none;
+}
+
+
+
+
+/* CUSTOM */
+.button-flat{border:none;}
+.button-beige{
+    color: #fff;
+    background-color:#DFD69F;
+}
+.stick-to-bottom{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+}
+.stick-to-bottom .button:last-of-type{
+    margin-bottom:0;
+}
