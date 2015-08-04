@@ -16,17 +16,14 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
     var Profile = {
         //all: profiles,
         create: function (user) {
-            var profile = {
-                city: user.city
-            };
-            Profile.set(user.uid, profile);
-            return ref.child('profiles').child(user.uid).set(profile);
+            Profile.set(user.uid, user);
+            return ref.child('profiles').child(user.uid).set(user);
         },
         edit: function (input) {
             var profile = ref.child('profiles').child(input.id);
 
             return $q(function (resolve, reject) {
-
+                
                 return profile.update(input, function (error) {
                     if (error) {
                         console.log('Synchronization failed');

@@ -8,17 +8,17 @@
  */
 kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', function AppCtrl($scope, $ionicModal, moment, Auth, $translate) {
 
-        $scope.user = Auth.user;
-        
-        $scope.lang = function(){
-            $translate.use($translate.use() === 'en' ? 'es' : 'en');
-        };
-    
-        $scope.changeCity = function(){
-            //show modal;
-        };
-    
-        $scope.logout = function(){
-            Auth.logout();
-        };
+    $scope.user = Auth.user;
+
+    $scope.lang = function () {
+        $translate.use($translate.use() === 'en' ? 'es' : 'en');
+    };
+
+    $scope.changeCity = function () {
+        //show modal;
+    };
+
+    $scope.logout = function () {
+        Auth.logout();
+    };
     }]);

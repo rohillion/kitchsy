@@ -8,8 +8,6 @@
 }
 
 
-
-
 /* CUSTOM */
 .button-flat{border:none;}
 .button-beige{
@@ -24,4 +22,15 @@
 }
 .stick-to-bottom .button:last-of-type{
     margin-bottom:0;
+}
+.slider-slide .box{
+    position: absolute;
+    top: 18%;
+    left: 0;
+    right: 0;
+}
+.box p{
+    padding: 0 40px;
+    color: #fff;
+    text-align: center;
 }

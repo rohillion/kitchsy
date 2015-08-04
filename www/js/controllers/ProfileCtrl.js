@@ -9,6 +9,7 @@
 kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher) {
 
     Profile.get(Auth.user.uid).then(function (profile) {
+        console.log(profile);
         $scope.profile = profile;
     });
 
@@ -37,6 +38,7 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
 
         Profile.edit(input).then(function (profile) {
             if (profile) {
+                $scope.profile.isHomeAvailable = $scope.profile.isChef = $scope.profile.username = $scope.profile.name = '';
                 $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
                 $state.go('app.events');
             } else {
