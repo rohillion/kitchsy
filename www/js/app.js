@@ -67,12 +67,36 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         })
 
+        .state('app.myevents', {
+            url: "/myevents",
+            access: {
+                requiresLogin: true,
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/myevents.html",
+                    controller: 'MyEventListCtrl',
+                }
+            }
+        })
+        
+        .state('app.myevents.create', {
+            url: "/myevents/create",
+            access: {
+                requiresLogin: true,
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/createEvent.html",
+                    controller: 'EventCreateCtrl',
+                }
+            }
+        })
+
         .state('app.cities', {
             url: "/cities",
             access: {
                 requiresLogin: true,
-                /*requiredPermissions: ['Admin', 'UserManager'],
-                 permissionType: 'AtLeastOne'*/
             },
             views: {
                 'menuContent': {
@@ -81,7 +105,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('profile', {
             url: "/profile",
             templateUrl: "templates/profile.html",

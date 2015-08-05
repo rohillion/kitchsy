@@ -9,7 +9,7 @@
             </ion-nav-buttons>
 
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-android-add"></button>
+                <button class="button button-icon button-clear ion-android-funnel"></button>
             </ion-nav-buttons>
 
         </ion-nav-bar>
@@ -24,7 +24,10 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close ng-click="changeCity()">
+                <ion-item menu-close ng-href="#app/events">
+                    {{ 'CHANGE_CITY' | translate }}
+                </ion-item>
+                <ion-item menu-close ng-href="#app/myevents">
                     {{ 'CHANGE_CITY' | translate }}
                 </ion-item>
                 <ion-item ng-click="lang()">

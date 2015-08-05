@@ -36,8 +36,8 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
                 Auth.user.profile.$destroy();
             }
             angular.copy({}, Auth.user);
-            $ionicHistory.clearCache();//Todo. Transition clear cache not working
-            $ionicHistory.clearHistory();
+            /*$ionicHistory.clearCache();//Todo. Transition clear cache not working
+            $ionicHistory.clearHistory();*/
             $location.path('/auth');
         }
     });

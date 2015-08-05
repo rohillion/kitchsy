@@ -8,14 +8,16 @@
  */
 kitchsy.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'Auth', function ($firebaseArray, $firebaseObject, FIREBASE_URL,Auth) {
         var ref = new Firebase(FIREBASE_URL);
-        //var events = $firebaseArray(ref.child('events').orderByChild("deletedAt").equalTo(false));
-        var events = $firebaseArray(ref.child('events').orderByChild("authorUID").equalTo(Auth.user.uid));
+        var eventsRef = ref.child('events');
+        //var events = $firebaseArray(ref.child('events').orderByChild("authorUID").equalTo(Auth.user.uid));
         
 
         var Event = {
-            all: events,
+            all: function (filters) {
+                return $firebaseArray(eventsRef.orderByChild("deletedAt").equalTo(false)).$loaded();
+            },
             create: function (event) {
-                return events.$add(event).then(function (eventRef) {
+                return $firebaseArray(eventsRef).$add(event).then(function (eventRef) {
                     ref.child('user_events').child(event.authorUID).child(eventRef.key())
                             .set(true);
                     return eventRef;

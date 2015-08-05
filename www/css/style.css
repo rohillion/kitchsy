@@ -7,6 +7,10 @@
     background-image: none;
 }
 
+button.button.button-icon.button-clear.ion-android-funnel:before {
+    font-size: 1.6em;
+}
+
 
 /* CUSTOM */
 .button-flat{border:none;}

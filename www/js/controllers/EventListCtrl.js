@@ -1,23 +1,13 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('EventListCtrl', ['$scope', '$location', 'Auth', 'Profile', function ($scope, $location, Auth, Profile) {
+kitchsy.controller('EventListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Event', function EventListCtrl($scope, $location, Auth, Profile, Event) {
        
-        var profile = Profile.get(Auth.user.uid);
+        $scope.events = {};
         
-        profile.then(function(user){
-            console.log(user.username);
+        Event.all(Auth.user.uid).then(function(events){
+            console.log(events);
+            $scope.events = events;
         });
-        
-    
-        if(!profile.city){
-            
-            
-            
-        }
-        else {
-        
-            
-        }
     
     }]);
