@@ -1,0 +1,47 @@
+<ion-view view-title="Create Event">
+
+    <ion-nav-buttons side="right">
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="item item-toggle">
+            More than one day
+            <label class="toggle">
+                <input type="checkbox" ng-model="$parent.event.manyDays">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
+
+
+        <div ng-hide="$parent.event.manyDays">
+
+            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+                <label style="border-top:none;" class="item item-input item-stacked-label">
+                    <span class="input-label">Date</span>
+                    <input type="text" placeholder="06/08/2015" ng-model="$parent.event.startDate">
+                </label>
+            </ionic-datepicker>
+        </div>
+
+        <div ng-show="$parent.event.manyDays">
+
+            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+                <label style="border-top:none;" class="item item-input item-stacked-label">
+                    <span class="input-label">From</span>
+                    <input type="text" placeholder="06/08/2015" ng-model="$parent.profile.startDate">
+                </label>
+            </ionic-datepicker>
+
+            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+                <label style="border-top:none;" class="item item-input item-stacked-label">
+                    <span class="input-label">To</span>
+                    <input type="text" placeholder="07/08/2015" ng-model="$parent.profile.endDate">
+                </label>
+            </ionic-datepicker>
+        </div>
+
+    </ion-content>
+</ion-view>

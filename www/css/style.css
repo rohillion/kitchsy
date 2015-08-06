@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
-
 /* OVERWRITES */
+
 .bar.bar-calm {
     border-color: inherit;
     background-color: #84BDAC;
@@ -11,29 +11,40 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
     font-size: 1.6em;
 }
 
-
+.previous-title {
+    vertical-align: bottom;
+    font-size: 0.8em;
+}
 /* CUSTOM */
-.button-flat{border:none;}
-.button-beige{
+
+.button-flat {
+    border: none;
+}
+
+.button-beige {
     color: #fff;
-    background-color:#DFD69F;
+    background-color: #DFD69F;
 }
-.stick-to-bottom{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
+
+.stick-to-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
-.stick-to-bottom .button:last-of-type{
-    margin-bottom:0;
+
+.stick-to-bottom .button:last-of-type {
+    margin-bottom: 0;
 }
-.slider-slide .box{
+
+.slider-slide .box {
     position: absolute;
     top: 18%;
     left: 0;
     right: 0;
 }
-.box p{
+
+.box p {
     padding: 0 40px;
     color: #fff;
     text-align: center;

@@ -10,13 +10,13 @@ kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Event', '
         $scope.events = events;
     });
 
-    $ionicModal.fromTemplateUrl('templates/modals/event.html', {
+    $ionicModal.fromTemplateUrl('templates/modals/chef_picker.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
         $scope.eventModal = modal;
     });
-    
+
     $scope.showModal = function () {
         $scope.eventModal.show();
     };
@@ -28,5 +28,17 @@ kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Event', '
     $scope.$on('modal.hidden', function () {
         //$scope.user.city = '';
     });
+
+
+    $scope.currentDate = new Date();
+    $scope.title = "Hello Title";
+
+    $scope.datePickerCallback = function (val) {
+        if (typeof (val) === 'undefined') {
+            console.log('Date not selected');
+        } else {
+            console.log('Selected date is : ', val);
+        }
+    };
 
     }]);

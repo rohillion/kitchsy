@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule']);
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule', 'ionic-datepicker']);
 
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, Auth) {
         $ionicPlatform.ready(function () {
@@ -80,14 +80,14 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         })
         
-        .state('app.myevents.create', {
-            url: "/myevents/create",
+        .state('app.create', {
+            url: "/create",
             access: {
                 requiresLogin: true,
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/createEvent.html",
+                    templateUrl: "templates/create.html",
                     controller: 'EventCreateCtrl',
                 }
             }
