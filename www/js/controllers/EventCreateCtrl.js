@@ -3,12 +3,18 @@
 
 kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Event', '$ionicModal', function EventCreateCtrl($scope, $location, Auth, Event, $ionicModal) {
 
-    $scope.events = {};
+    /*$scope.events = {};
 
     Event.all(Auth.user.uid).then(function (events) {
         console.log(events);
         $scope.events = events;
-    });
+    });*/
+    
+    $scope.event = {
+        repeat : 'Never',
+        starts : '06/08/2015',
+        ends : '07/08/2015',
+    };
 
     $ionicModal.fromTemplateUrl('templates/modals/chef_picker.html', {
         scope: $scope,

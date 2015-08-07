@@ -5,42 +5,43 @@
 
     <ion-content>
 
+        <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+            <div class="item" ng-click="showPlaceModal()">
+                Starts
+                <span class="item-note">{{$parent.event.starts}}</span>
+            </div>
+        </ionic-datepicker>
+
+        <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+            <div class="item" ng-click="showPlaceModal()">
+                Ends
+                <span class="item-note">{{$parent.event.ends}}</span>
+            </div>
+        </ionic-datepicker>
+
+        <div class="item" ng-click="showRepeatModal()">
+            Repeat
+            <span class="item-note">{{$parent.event.repeat}}</span>
+        </div>
+
+        <div class="item item-icon-right" ng-click="showPlaceModal()">
+            Place
+            <i class="icon ion-navigate icon-xs"></i>
+        </div>
+
+        <div class="item" ng-click="showPlaceModal()">
+            Max guests
+            <span class="item-note">15</span>
+        </div>
+
         <div class="item item-toggle">
-            More than one day
+            Need a chef?
             <label class="toggle">
-                <input type="checkbox" ng-model="$parent.event.manyDays">
+                <input type="checkbox" ng-model="$parent.profile.chef">
                 <div class="track">
                     <div class="handle"></div>
                 </div>
             </label>
-        </div>
-
-
-        <div ng-hide="$parent.event.manyDays">
-
-            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
-                <label style="border-top:none;" class="item item-input item-stacked-label">
-                    <span class="input-label">Date</span>
-                    <input type="text" placeholder="06/08/2015" ng-model="$parent.event.startDate">
-                </label>
-            </ionic-datepicker>
-        </div>
-
-        <div ng-show="$parent.event.manyDays">
-
-            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
-                <label style="border-top:none;" class="item item-input item-stacked-label">
-                    <span class="input-label">From</span>
-                    <input type="text" placeholder="06/08/2015" ng-model="$parent.profile.startDate">
-                </label>
-            </ionic-datepicker>
-
-            <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
-                <label style="border-top:none;" class="item item-input item-stacked-label">
-                    <span class="input-label">To</span>
-                    <input type="text" placeholder="07/08/2015" ng-model="$parent.profile.endDate">
-                </label>
-            </ionic-datepicker>
         </div>
 
     </ion-content>
