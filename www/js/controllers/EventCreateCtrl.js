@@ -1,19 +1,46 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Event', '$ionicModal', function EventCreateCtrl($scope, $location, Auth, Event, $ionicModal) {
+kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Event', '$ionicModal', function EventCreateCtrl($scope, $location, Auth, Profile, Event, $ionicModal) {
 
-    /*$scope.events = {};
+    Profile.get(Auth.user.uid).then(function (profile) {
+        console.log(profile);
+        $scope.event.chef = !profile.isChef;
+    });
 
-    Event.all(Auth.user.uid).then(function (events) {
-        console.log(events);
-        $scope.events = events;
-    });*/
+    $scope.repeatOptions = [
+        {
+            id: 1,
+            name: 'Never',
+        },
+        {
+            id: 2,
+            name: 'Once a week',
+        },
+        {
+            id: 3,
+            name: 'Every day',
+        }
+    ];
+
+    var getRange = function (min, max, step) {
+        step = step || 1;
+        var input = [];
+        for (var i = min; i <= max; i += step) input.push({
+            id: i
+        });
+        return input;
+    };
     
+    $scope.guestsRange = getRange(1,100);
+
     $scope.event = {
-        repeat : 'Never',
-        starts : '06/08/2015',
-        ends : '07/08/2015',
+        repeat: '1',
+        starts: new Date(),
+        place: '',
+        coords: '',
+        chef: false,
+        guests: 15,
     };
 
     $ionicModal.fromTemplateUrl('templates/modals/chef_picker.html', {
@@ -34,17 +61,5 @@ kitchsy.controller('EventCreateCtrl', ['$scope', '$location', 'Auth', 'Event', '
     $scope.$on('modal.hidden', function () {
         //$scope.user.city = '';
     });
-
-
-    $scope.currentDate = new Date();
-    $scope.title = "Hello Title";
-
-    $scope.datePickerCallback = function (val) {
-        if (typeof (val) === 'undefined') {
-            console.log('Date not selected');
-        } else {
-            console.log('Selected date is : ', val);
-        }
-    };
 
     }]);

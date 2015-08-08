@@ -5,39 +5,46 @@
 
     <ion-content>
 
-        <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
+        <!--<ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
             <div class="item" ng-click="showPlaceModal()">
-                Starts
+                Date
                 <span class="item-note">{{$parent.event.starts}}</span>
             </div>
-        </ionic-datepicker>
+        </ionic-datepicker>-->
 
-        <ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
-            <div class="item" ng-click="showPlaceModal()">
-                Ends
-                <span class="item-note">{{$parent.event.ends}}</span>
+        <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date" ng-model="$parent.event.starts" style="color:#aaa; text-align: right;">
+        </label>
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Repeat
             </div>
-        </ionic-datepicker>
+            <select style="color:#aaa;">
+                <option ng-repeat="option in $parent.repeatOptions" ng-selected="option.id === $parent.event.repeat" value="option.id">{{option.name}}</option>
+            </select>
+        </label>
 
-        <div class="item" ng-click="showRepeatModal()">
-            Repeat
-            <span class="item-note">{{$parent.event.repeat}}</span>
-        </div>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Max Guests
+            </div>
+            <select style="color:#aaa;">
+                <option ng-repeat="n in $parent.guestsRange" ng-selected="n.id === $parent.event.guests" value="n.id">{{n.id}}</option>
+            </select>
+        </label>
 
-        <div class="item item-icon-right" ng-click="showPlaceModal()">
+        <div class="item" ng-click="showPlaceModal()" ng-class="{'item-icon-right':!$parent.event.place}">
             Place
-            <i class="icon ion-navigate icon-xs"></i>
-        </div>
-
-        <div class="item" ng-click="showPlaceModal()">
-            Max guests
-            <span class="item-note">15</span>
+            <span class="item-note">{{$parent.event.place}}</span>
+            <i class="icon ion-navigate item-note icon-xs" ng-show="!$parent.event.place"></i>
         </div>
 
         <div class="item item-toggle">
             Need a chef?
             <label class="toggle">
-                <input type="checkbox" ng-model="$parent.profile.chef">
+                <input type="checkbox" ng-model="$parent.event.chef">
                 <div class="track">
                     <div class="handle"></div>
                 </div>
@@ -45,4 +52,10 @@
         </div>
 
     </ion-content>
+
+    <div class="padding stick-to-bottom">
+        <button ng-click="save()" ng-disabled="!event.place" class="button button-block button-flat button-beige">
+            Next
+        </button>
+    </div>
 </ion-view>
