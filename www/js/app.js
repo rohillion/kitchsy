@@ -80,15 +80,28 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         })
         
-        .state('app.create', {
-            url: "/create",
+        .state('app.event_edit', {
+            url: "/event_edit/:event_id",
             access: {
                 requiresLogin: true,
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/create.html",
-                    controller: 'EventCreateCtrl',
+                    templateUrl: "templates/event_edit.html",
+                    controller: 'EventEditCtrl',
+                }
+            }
+        })
+        
+        .state('app.menu_edit', {
+            url: "/menu_edit/:event_id",
+            access: {
+                requiresLogin: true,
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/menu_edit.html",
+                    controller: 'MenuEditCtrl',
                 }
             }
         })

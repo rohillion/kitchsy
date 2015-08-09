@@ -11,7 +11,7 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
     font-size: 1.6em;
 }
 
-.previous-title {
+.back-text .previous-title, .back-text .default-title {
     vertical-align: bottom;
     font-size: 0.8em;
 }

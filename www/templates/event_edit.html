@@ -1,4 +1,4 @@
-<ion-view view-title="Create Event">
+<ion-view view-title="Event Info">
 
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
@@ -21,24 +21,21 @@
             <div class="input-label">
                 Repeat
             </div>
-            <select style="color:#aaa;">
-                <option ng-repeat="option in $parent.repeatOptions" ng-selected="option.id === $parent.event.repeat" value="option.id">{{option.name}}</option>
-            </select>
+            
+            <select style="color:#aaa;" ng-model="$parent.event.repeat" ng-options="option as option.name for option in $parent.repeatOptions track by option.id"></select>
         </label>
 
         <label class="item item-input item-select">
             <div class="input-label">
                 Max Guests
             </div>
-            <select style="color:#aaa;">
-                <option ng-repeat="n in $parent.guestsRange" ng-selected="n.id === $parent.event.guests" value="n.id">{{n.id}}</option>
-            </select>
+            <select style="color:#aaa;" ng-model="$parent.event.guests" ng-options="option as option.name for option in $parent.guestsRange track by option.id"></select>
         </label>
 
-        <div class="item" ng-click="showPlaceModal()" ng-class="{'item-icon-right':!$parent.event.place}">
+        <div class="item item-icon-right" ng-click="showPlaceModal()">
             Place
             <span class="item-note">{{$parent.event.place}}</span>
-            <i class="icon ion-navigate item-note icon-xs" ng-show="!$parent.event.place"></i>
+            <i class="icon ion-navigate item-note icon-xs"></i>
         </div>
 
         <div class="item item-toggle">
@@ -54,7 +51,7 @@
     </ion-content>
 
     <div class="padding stick-to-bottom">
-        <button ng-click="save()" ng-disabled="!event.place" class="button button-block button-flat button-beige">
+        <button ng-click="save()" ng-disabled="!event.coords" class="button button-block button-flat button-beige">
             Next
         </button>
     </div>
