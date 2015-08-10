@@ -74,7 +74,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/myevents.html",
+                    templateUrl: "templates/my_events.html",
                     controller: 'MyEventListCtrl',
                 }
             }

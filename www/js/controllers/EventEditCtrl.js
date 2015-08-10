@@ -10,11 +10,15 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
     Event.get($stateParams.event_id).then(function (event) {
         $scope.event = {
             starts: new Date(moment.unix(event.starts).format("DD/MM/YYYY")),
-            repeat: {id: event.repeat},
-            guests: {id:event.guests},
+            repeat: {
+                id: event.repeat
+            },
+            guests: {
+                id: event.guests
+            },
             place: '6 Gardiner Street Upper',
             coords: '123456,123456',
-            chef: event.chef,
+            chef: event.chef
         };
         $ionicLoading.hide();
     });
@@ -46,19 +50,6 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
 
     $scope.guestsRange = getRange(1, 100);
 
-    $scope.event = {
-        starts: new Date(),
-        repeat: {
-            id: 2
-        },
-        guests: {
-            id: 15
-        },
-        place: '6 Gardiner Street Upper',
-        coords: '123456,123456',
-        chef: false,
-    };
-
     $scope.save = function () {
         var input = {
             starts: moment($scope.event.starts).unix(),
@@ -66,7 +57,7 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
             place: $scope.event.place,
             coords: $scope.event.coords,
             guests: $scope.event.guests.id,
-            chef: $scope.event.chef,
+            chef: $scope.event.chef
         }
 
         $ionicLoading.show({
@@ -75,7 +66,6 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
         });
 
         Event.edit($stateParams.event_id, input).then(function (event) {
-            console.log(event);
             $state.go("app.menu_edit", {
                 event_id: $stateParams.event_id
             });

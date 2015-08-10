@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 /* OVERWRITES */
 
-.bar.bar-calm {
+.button.button-calm, .bar.bar-calm {
     border-color: inherit;
     background-color: #84BDAC;
     background-image: none;

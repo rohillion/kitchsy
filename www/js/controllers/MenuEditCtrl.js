@@ -1,12 +1,22 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('MenuEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', '$ionicNavBarDelegate', function MenuEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, $ionicNavBarDelegate) {
-    
-    $scope.event_id = $stateParams.event_id;
+kitchsy.controller('MenuEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', '$ionicLoading', function MenuEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, $ionicLoading) {
+
+    $ionicLoading.show({
+        template: 'Loading...'
+    });
+
+    $scope.title = 'Event Menu';
 
     Event.get($stateParams.event_id).then(function (event) {
+        console.log(event);
         $scope.event = event;
+        $ionicLoading.hide();
+
+        if ($scope.event.chef) {
+            $scope.title = 'Event Chef';
+        }
     });
 
 
@@ -14,15 +24,17 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
-        $scope.eventModal = modal;
+        $scope.chefListModal = modal;
+        if (!$scope.event.chefs)
+            $scope.chefListModal.show();
     });
 
     $scope.showModal = function () {
-        $scope.eventModal.show();
+        $scope.chefListModal.show();
     };
 
     $scope.closeModal = function () {
-        $scope.eventModal.hide();
+        $scope.chefListModal.hide();
     };
 
     $scope.$on('modal.hidden', function () {

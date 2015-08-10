@@ -5,13 +5,6 @@
 
     <ion-content>
 
-        <!--<ionic-datepicker idate="currentDate" disablepreviousdates="true" disablefuturedates="false" callback="datePickerCallback" disableddates="disabledDates" title="title" mondayfirst="true">
-            <div class="item" ng-click="showPlaceModal()">
-                Date
-                <span class="item-note">{{$parent.event.starts}}</span>
-            </div>
-        </ionic-datepicker>-->
-
         <label class="item item-input">
             <span class="input-label">Date</span>
             <input type="date" ng-model="$parent.event.starts" style="color:#aaa; text-align: right;">
@@ -52,7 +45,7 @@
 
     <div class="padding stick-to-bottom">
         <button ng-click="save()" ng-disabled="!event.coords" class="button button-block button-flat button-beige">
-            Next
+            {{event.chef ? 'Select the chef' : 'Build the menu' }}
         </button>
     </div>
 </ion-view>

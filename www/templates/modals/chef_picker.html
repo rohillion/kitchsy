@@ -1,38 +1,28 @@
 <ion-modal-view>
+    
     <ion-header-bar>
-        <button class="button button-icon button-clear ion-android-close" ng-click="closeModal()">
-        </button>
         <h3 class="title">Select a Chef</h3>
+        <button class="button button-icon button-clear ion-ios-close-empty" ng-click="closeModal()">
+        </button>
     </ion-header-bar>
 
     <ion-content>
-        <form id="topic-form">
-            <div class="list">
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Patient Name</span>
-                    <input type="text" placeholder="John Doe" ng-model="newEvent.title">
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Motive</span>
-                    <select>
-                        <option>Revision</option>
-                        <option>Aesthetic</option>
-                        <option>Implantology</option>
-                        <option>Endodontics</option>
-                        <option>Prosthesis</option>
-                        <option>Orthodontics</option>
-                        <option>Periodontology</option>
-                        <option>Surgery</option>
-                    </select>
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Observations</span>
-                    <input type="text" placeholder="Patient needs a revision.." ng-model="newEvent.description">
+        <div class="list">
+
+            <div class="item item-input-inset" style="border-top:none;">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios-search placeholder-icon"></i>
+                    <input type="search" placeholder="Try Sushi..">
                 </label>
             </div>
-        </form>
+
+        </div>
     </ion-content>
-    <div class="bar bar-footer bar-calm" ng-click="addEvent()">
-        <div class="title"><i class="icon ion-checkmark"></i></div>
+    
+    <div class="padding stick-to-bottom">
+        <a ng-click="save()" ng-disabled="event.chefs.length < 1" class="button button-block button-flat button-calm">
+            <i class="icon ion-checkmark"></i>
+        </a>
     </div>
+    
 </ion-modal-view>

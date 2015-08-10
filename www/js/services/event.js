@@ -14,7 +14,8 @@ kitchsy.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
 
     var Event = {
         all: function (filters) {
-            return $firebaseArray(eventsRef.orderByChild("deletedAt").equalTo(false)).$loaded();
+            //return $firebaseArray(eventsRef.orderByChild("deletedAt").equalTo(false)).$loaded();
+            return $firebaseArray(eventsRef).$loaded();
         },
         create: function (userID, event) {
             return $firebaseArray(eventsRef).$add(event).then(function (eventRef) {
@@ -24,8 +25,6 @@ kitchsy.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
             });
         },
         edit: function (event_id, input) {
-            console.log(event_id);
-            console.log(input);
             var event = eventsRef.child(event_id);
 
             return $q(function (resolve, reject) {
@@ -48,9 +47,11 @@ kitchsy.factory('Event', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
             //return events.$getRecord(eventId);
         },
         delete: function (event) {
-            return ref.child('events')
-                .child(event.key)
-                .child("deletedAt").set(Math.floor(Date.now() / 1000));
+            console.log(event);
+            /*return ref.child('events')
+                .child(event.$id)
+                .child("deletedAt").set(Math.floor(Date.now() / 1000));*/
+            return $firebaseArray(eventsRef).$remove(event);
         },
         comments: function (eventId) {
             return $firebaseArray(ref.child('comments').child(eventId));

@@ -1,54 +1,19 @@
 <ion-view view-title="Menu">
 
+    <ion-nav-title>{{title}}</ion-nav-title>
+
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
     <ion-content>
 
-        <label class="item item-input">
-            <span class="input-label">Date</span>
-            <input type="date" ng-model="$parent.event.starts" style="color:#aaa; text-align: right;">
-        </label>
-
-        <label class="item item-input item-select">
-            <div class="input-label">
-                Repeat
-            </div>
-            <select style="color:#aaa;">
-                <option ng-repeat="option in $parent.repeatOptions" ng-selected="option.id === $parent.event.repeat" value="option.id">{{option.name}}</option>
-            </select>
-        </label>
-
-        <label class="item item-input item-select">
-            <div class="input-label">
-                Max Guests
-            </div>
-            <select style="color:#aaa;">
-                <option ng-repeat="n in $parent.guestsRange" ng-selected="n.id === $parent.event.guests" value="n.id">{{n.id}}</option>
-            </select>
-        </label>
-
-        <div class="item item-icon-right" ng-click="showPlaceModal()">
-            Place
-            <span class="item-note">{{$parent.event.place}}</span>
-            <i class="icon ion-navigate item-note icon-xs"></i>
-        </div>
-
-        <div class="item item-toggle">
-            Need a chef?
-            <label class="toggle">
-                <input type="checkbox" ng-model="$parent.event.chef">
-                <div class="track">
-                    <div class="handle"></div>
-                </div>
-            </label>
-        </div>
+        
 
     </ion-content>
 
     <div class="padding stick-to-bottom">
-        <a ng-href="#app/event_config" ng-disabled="!event.coords" class="button button-block button-flat button-beige">
-            Next
+        <a ng-click="save()" ng-disabled="event.chefs.length < 1" class="button button-block button-flat button-beige">
+            <i class="icon ion-checkmark"></i>
         </a>
     </div>
 </ion-view>
