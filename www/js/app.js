@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule', 'ionic-datepicker']);
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule', 'uiGmapgoogle-maps']);
 
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, Auth) {
         $ionicPlatform.ready(function () {
@@ -34,7 +34,13 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
     }])
-    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', 'uiGmapGoogleMapApiProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
+
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBL4Xp4ProV6eOky-NQdV2kTQjPMA_zCx8',
+            v: '3.17',
+            libraries: 'places'
+        });
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/locale-',
@@ -79,7 +85,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.event_edit', {
             url: "/event_edit/:event_id",
             access: {
@@ -92,7 +98,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.menu_edit', {
             url: "/menu_edit/:event_id",
             access: {

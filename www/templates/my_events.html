@@ -12,7 +12,7 @@
 
         <ion-list can-swipe="true">
             <ion-item class="item" collection-repeat="event in $parent.events" ng-click="editEvent(event.$id)">
-                {{event.$id}}
+                {{event.title}}
                 <ion-option-button class="button-assertive" ng-click="$parent.events.$remove(event)">
                     Delete
                 </ion-option-button>

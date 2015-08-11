@@ -1,7 +1,13 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', 'moment', '$ionicLoading', '$ionicNavBarDelegate', function EventEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, moment, $ionicLoading, $ionicNavBarDelegate) {
+kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', 'moment', '$ionicLoading', '$ionicNavBarDelegate', 'uiGmapGoogleMapApi', function EventEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, moment, $ionicLoading, $ionicNavBarDelegate, uiGmapGoogleMapApi) {
+    
+    uiGmapGoogleMapApi.then(function(maps) {
+        
+    });
+    
+    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 
     $ionicLoading.show({
         template: 'Loading...'
@@ -9,6 +15,7 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
 
     Event.get($stateParams.event_id).then(function (event) {
         $scope.event = {
+            title: event.title,
             starts: new Date(moment.unix(event.starts).format("DD/MM/YYYY")),
             repeat: {
                 id: event.repeat
@@ -52,6 +59,7 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
 
     $scope.save = function () {
         var input = {
+            title: $scope.event.title,
             starts: moment($scope.event.starts).unix(),
             repeat: $scope.event.repeat.id,
             place: $scope.event.place,
@@ -72,7 +80,7 @@ kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth',
         });
     }
 
-    $ionicModal.fromTemplateUrl('templates/modals/chef_picker.html', {
+    $ionicModal.fromTemplateUrl('templates/modals/map.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {

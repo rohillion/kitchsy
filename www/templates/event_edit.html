@@ -4,6 +4,11 @@
     </ion-nav-buttons>
 
     <ion-content>
+        
+        <label class="item item-input">
+            <span class="input-label">Title</span>
+            <input type="text" ng-model="$parent.event.title" style="color:#aaa; text-align: right;">
+        </label>
 
         <label class="item item-input">
             <span class="input-label">Date</span>
@@ -25,7 +30,7 @@
             <select style="color:#aaa;" ng-model="$parent.event.guests" ng-options="option as option.name for option in $parent.guestsRange track by option.id"></select>
         </label>
 
-        <div class="item item-icon-right" ng-click="showPlaceModal()">
+        <div class="item item-icon-right" ng-click="showModal()">
             Place
             <span class="item-note">{{$parent.event.place}}</span>
             <i class="icon ion-navigate item-note icon-xs"></i>

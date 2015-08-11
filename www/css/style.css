@@ -55,3 +55,7 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
     color: #fff;
     text-align: center;
 }
+
+.angular-google-map-container { 
+    height: 400px; 
+}

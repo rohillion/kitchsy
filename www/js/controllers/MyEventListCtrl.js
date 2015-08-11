@@ -23,6 +23,7 @@ kitchsy.controller('MyEventListCtrl', ['$scope', '$state', 'Auth', 'Profile', 'E
 
     $scope.createEvent = function () {
         var input = {
+            title : 'New event',
             starts : moment(new Date()).unix(),
             repeat : $scope.event.repeat.id,
             chef : $scope.event.chef,
