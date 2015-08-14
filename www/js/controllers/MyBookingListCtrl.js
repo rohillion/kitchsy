@@ -1,7 +1,7 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('MyEventListCtrl', ['$scope', '$state', 'Auth', 'Profile', 'Event', '$ionicModal', '$ionicLoading', function MyEventListCtrl($scope, $state, Auth, Profile, Event, $ionicModal, $ionicLoading) {
+kitchsy.controller('MyBookingListCtrl', ['$scope', '$state', 'Auth', 'Profile', 'Event', '$ionicModal', '$ionicLoading', function MyBookingListCtrl($scope, $state, Auth, Profile, Event, $ionicModal, $ionicLoading) {
 
     $scope.events = [];
     

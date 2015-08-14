@@ -1,7 +1,7 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('EventListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Event', function EventListCtrl($scope, $location, Auth, Profile, Event) {
+kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Event', function CookListCtrl($scope, $location, Auth, Profile, Event) {
 
     $scope.events = {};
 

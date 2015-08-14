@@ -40,7 +40,7 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
             if (profile) {
                 $scope.profile.isHomeAvailable = $scope.profile.isChef = $scope.profile.username = $scope.profile.name = '';
                 $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-                $state.go('app.events');
+                $state.go('app.cooks');
             } else {
                 $ionicLoading.hide();
                 alert(profile);

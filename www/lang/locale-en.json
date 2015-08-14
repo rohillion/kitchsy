@@ -1,5 +1,7 @@
 {
-    "CHANGE_CITY": "Showing events in ",
+    "CHANGE_CITY": "Showing cooks in ",
+    "MY_PROFILE": "My Profile",
+    "MY_BOOKING": "My Booking",
     "CHANGE_LANG": "Change Lenguage",
     "LOGOUT": "Logout"
 }

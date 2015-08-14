@@ -24,11 +24,14 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close ng-href="#app/events">
+                <ion-item menu-close ng-href="#app/cooks">
                     {{ 'CHANGE_CITY' | translate }}
                 </ion-item>
-                <ion-item menu-close ng-href="#app/myevents">
-                    {{ 'CHANGE_CITY' | translate }}
+                <ion-item menu-close ng-href="#app/my_booking">
+                    {{ 'MY_BOOKING' | translate }}
+                </ion-item>
+                <ion-item menu-close ng-href="#profile">
+                    {{ 'MY_PROFILE' | translate }}
                 </ion-item>
                 <ion-item ng-click="lang()">
                     {{ 'CHANGE_LANG' | translate }}

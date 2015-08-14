@@ -58,8 +58,8 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             controller: 'AppCtrl'
         })
 
-        .state('app.events', {
-            url: "/events",
+        .state('app.cooks', {
+            url: "/cooks",
             access: {
                 requiresLogin: true,
                 /*requiredPermissions: ['Admin', 'UserManager'],
@@ -67,21 +67,21 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/events.html",
-                    controller: 'EventListCtrl',
+                    templateUrl: "templates/cooks.html",
+                    controller: 'CookListCtrl',
                 }
             }
         })
 
-        .state('app.myevents', {
-            url: "/myevents",
+        .state('app.my_booking', {
+            url: "/my_booking",
             access: {
                 requiresLogin: true,
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/my_events.html",
-                    controller: 'MyEventListCtrl',
+                    templateUrl: "templates/my_booking.html",
+                    controller: 'MyBookingListCtrl',
                 }
             }
         })
@@ -143,7 +143,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/events');
+        $urlRouterProvider.otherwise('/app/cooks');
 
             }])
     .constant('moment', moment)
