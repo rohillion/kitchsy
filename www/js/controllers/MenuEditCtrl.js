@@ -1,7 +1,7 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('MenuEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', '$ionicLoading', function MenuEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, $ionicLoading) {
+kitchsy.controller('MenuEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Menu', '$ionicModal', '$ionicLoading', function MenuEditCtrl($scope, $state, $stateParams, Auth, Profile, Menu, $ionicModal, $ionicLoading) {
 
     $ionicLoading.show({
         template: 'Loading...'

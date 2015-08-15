@@ -6,11 +6,19 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher) {
+kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', '$ionicSideMenuDelegate', '$ionicHistory', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher, $ionicSideMenuDelegate, $ionicHistory) {
+
+    $scope.showMenuButton = false;
+    
+    console.log('entra');
 
     Profile.get(Auth.user.uid).then(function (profile) {
-        console.log(profile);
         $scope.profile = profile;
+        console.log(profile);
+        $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
+        $ionicHistory.nextViewOptions({
+            disableBack: !$scope.showMenuButton
+        });
     });
 
     $scope.save = function () {
@@ -28,18 +36,21 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
             name: $scope.profile.name,
             username: $scope.profile.username,
             isChef: $scope.profile.isChef,
-            isHomeAvailable: !$scope.profile.isChef ? false : $scope.profile.isHomeAvailable
         }
 
         $ionicLoading.show({
             template: 'Saving...',
-            hideOnStateChange:true
+            hideOnStateChange: true
         });
 
         Profile.edit(input).then(function (profile) {
             if (profile) {
-                $scope.profile.isHomeAvailable = $scope.profile.isChef = $scope.profile.username = $scope.profile.name = '';
+                //$scope.profile.isChef = $scope.profile.username = $scope.profile.name = '';
                 $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+                if(!$scope.showMenuButton){
+                    $scope.showMenuButton = true;
+                    $ionicSideMenuDelegate.canDragContent(true);
+                }
                 $state.go('app.cooks');
             } else {
                 $ionicLoading.hide();

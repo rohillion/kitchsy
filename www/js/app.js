@@ -54,7 +54,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/menu.html",
+            templateUrl: "templates/main.html",
             controller: 'AppCtrl'
         })
 
@@ -86,21 +86,21 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         })
 
-        .state('app.event_edit', {
-            url: "/event_edit/:event_id",
+        .state('app.schedule_edit', {
+            url: "/schedule_edit",
             access: {
                 requiresLogin: true,
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/event_edit.html",
-                    controller: 'EventEditCtrl',
+                    templateUrl: "templates/schedule_edit.html",
+                    controller: 'ScheduleEditCtrl',
                 }
             }
         })
-
+        
         .state('app.menu_edit', {
-            url: "/menu_edit/:event_id",
+            url: "/menu_edit/:day_id",
             access: {
                 requiresLogin: true,
             },
@@ -111,26 +111,17 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-
-        .state('app.cities', {
-            url: "/cities",
+        
+        .state('app.profile', {
+            url: "/profile",
             access: {
                 requiresLogin: true,
             },
             views: {
                 'menuContent': {
-                    templateUrl: "templates/cities.html",
-                    controller: 'CityListCtrl',
+                    templateUrl: "templates/profile.html",
+                    controller: 'ProfileCtrl',
                 }
-            }
-        })
-
-        .state('profile', {
-            url: "/profile",
-            templateUrl: "templates/profile.html",
-            controller: 'ProfileCtrl',
-            access: {
-                requiresLogin: true
             }
         })
 

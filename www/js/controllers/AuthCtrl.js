@@ -1,10 +1,10 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicLoading', '$ionicHistory', function AuthCtrl($scope, $location, Auth, Profile, $ionicModal, $ionicSlideBoxDelegate, $ionicLoading, $ionicHistory) {
+kitchsy.controller('AuthCtrl', ['$scope', '$state', 'Auth', 'Profile', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicLoading', '$ionicHistory', function AuthCtrl($scope, $state, Auth, Profile, $ionicModal, $ionicSlideBoxDelegate, $ionicLoading, $ionicHistory) {
 
     if (Auth.signedIn()) {
-        $location.path('/events');
+        $state.go('app.cooks');
     }
 
     $scope.user = {};
@@ -21,7 +21,7 @@ kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ioni
         });
 
         Auth.login($scope.user).then(function () {
-            $location.path('/events');
+            $state.go('app.cooks');
             $scope.loginSignupModal.hide();
         }, function (error) {
             console.log(error);
@@ -31,7 +31,7 @@ kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ioni
     };
 
     $scope.signup = function () {
-        
+
         $ionicHistory.nextViewOptions({
             disableAnimate: true
         });
@@ -45,11 +45,11 @@ kitchsy.controller('AuthCtrl', ['$scope', '$location', 'Auth', 'Profile', '$ioni
             return Auth.login($scope.user)
                 .then(function () {
                     user.city = $scope.user.city;
-                    user.isHomeAvailable = user.isChef = false;
+                    user.isChef = false;
                     return Profile.create(user);
                 })
                 .then(function () {
-                    $location.path('/profile');
+                    $state.go('app.profile');
                     $scope.loginSignupModal.hide();
                 });
         }, function (error) {

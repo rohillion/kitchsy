@@ -1,9 +1,11 @@
 <ion-view view-title="Profile">
-    <!-- TODO. Lang support -->
 
-    <ion-header-bar class="bar-calm">
-        <h1 class="title">Profile</h1>
-    </ion-header-bar>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-show="showMenuButton"></button>
+    </ion-nav-buttons>
+    
+    <ion-nav-buttons side="right">
+    </ion-nav-buttons>
 
     <ion-content>
         <form id="profile-form">
@@ -20,7 +22,7 @@
                 </label>
 
                 <div class="item item-toggle">
-                    I'm a Chef
+                    I want to offer a menu as a Cook
                     <label class="toggle">
                         <input type="checkbox" ng-model="$parent.profile.isChef">
                         <div class="track">
@@ -29,22 +31,17 @@
                     </label>
                 </div>
 
-                <div ng-show="$parent.profile.isChef" class="item item-toggle ng-hide">
-                    I'm available to cook at the
-                    <br>client's house
-                    <label class="toggle">
-                        <input type="checkbox" ng-model="$parent.profile.isHomeAvailable">
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
+                <div ng-show="$parent.profile.isChef" class="item item-icon-right" ng-href="#app/schedule_edit">
+                    Edit menu
+                    <span class="item-note">{{$parent.event.place}}</span>
+                    <i class="icon ion-ios-arrow-right item-note icon-xs"></i>
                 </div>
 
             </div>
         </form>
     </ion-content>
-    
-    <div class="padding stick-to-bottom">
+
+    <div class="padding stick-to-bottom" ng-hide="showMenuButton">
         <button ng-click="save()" ng-disabled="!profile.name || !profile.username" class="button button-block button-flat button-beige">
             <i class="icon ion-checkmark"></i>
         </button>

@@ -6,7 +6,7 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', function AppCtrl($scope, $ionicModal, moment, Auth, $translate) {
+kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', '$stateParams', function AppCtrl($scope, $ionicModal, moment, Auth, $translate, $stateParams) {
 
     $scope.user = Auth.user;
 
