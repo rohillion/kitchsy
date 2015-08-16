@@ -13,25 +13,13 @@ kitchsy.factory('Schedule', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL'
 
 
     var Schedule = {
-        all: function (filters) {
-            //return $firebaseArray(schedulesRef.orderByChild("deletedAt").equalTo(false)).$loaded();
-            return $firebaseArray(schedulesRef).$loaded();
-        },
-        create: function (userID, schedule) {
-            return $firebaseArray(schedulesRef).$add(schedule).then(function (scheduleRef) {
-                ref.child('user_schedules').child(userID).child(scheduleRef.key())
-                    .set(true);
-                return scheduleRef;
-            });
-        },
-        edit: function (schedule_id, input) {
-            var schedule = schedulesRef.child(schedule_id);
+        edit: function (userId, input) {
 
             return $q(function (resolve, reject) {
 
-                return schedule.update(input, function (error) {
+                return schedulesRef.child(userId).child(input.id).set(input.on, function (error) {
                     if (error) {
-                        console.log('Synchronization failed');
+                        console.log('Schedule::edit: failed');
                         reject('Synchronization failed');
                     } else {
                         //Profile.set(input.id, input);
@@ -42,9 +30,8 @@ kitchsy.factory('Schedule', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL'
 
             });
         },
-        get: function (scheduleId) {
-            return $firebaseObject(ref.child('schedules').child(scheduleId)).$loaded();
-            //return schedules.$getRecord(scheduleId);
+        get: function (userId) {
+            return $firebaseObject(schedulesRef.child(userId)).$loaded();
         }
     };
 

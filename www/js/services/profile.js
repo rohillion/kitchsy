@@ -38,19 +38,20 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
 
             });
         },
-        get: function (userID) {
+        get: function (userID, fromServer) {
+            
+            if(fromServer)
+                return $firebaseObject(ref.child('profiles').child(userID)).$loaded();
 
             return $q(function (resolve, reject) {
 
                 var profile = localStorageService.get(userID);
                 if (!profile) {
                     $firebaseObject(ref.child('profiles').child(userID)).$loaded(function (profile) {
-                        console.log('firebase');
                         Profile.set(userID, profile);
                         resolve(profile);
                     });
                 } else {
-                    console.log('cache');
                     resolve(profile);
                 }
             });

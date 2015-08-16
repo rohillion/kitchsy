@@ -22,7 +22,7 @@
                 </label>
 
                 <div class="item item-toggle">
-                    I want to offer a menu as a Cook
+                    I want to cook
                     <label class="toggle">
                         <input type="checkbox" ng-model="$parent.profile.isChef">
                         <div class="track">
@@ -31,17 +31,21 @@
                     </label>
                 </div>
 
-                <div ng-show="$parent.profile.isChef" class="item item-icon-right" ng-href="#app/schedule_edit">
-                    Edit menu
-                    <span class="item-note">{{$parent.event.place}}</span>
+                <!--<a ng-show="$parent.profile.isChef" class="item item-icon-right" ng-href="#app/schedule_edit">
+                    Schedule
                     <i class="icon ion-ios-arrow-right item-note icon-xs"></i>
-                </div>
+                </a>
+                
+                <a ng-show="$parent.profile.isChef" class="item item-icon-right" ng-href="#app/menu_edit">
+                    Menu
+                    <i class="icon ion-ios-arrow-right item-note icon-xs"></i>
+                </a>-->
 
             </div>
         </form>
     </ion-content>
 
-    <div class="padding stick-to-bottom" ng-hide="showMenuButton">
+    <div class="padding stick-to-bottom">
         <button ng-click="save()" ng-disabled="!profile.name || !profile.username" class="button button-block button-flat button-beige">
             <i class="icon ion-checkmark"></i>
         </button>

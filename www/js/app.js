@@ -100,7 +100,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
         })
         
         .state('app.menu_edit', {
-            url: "/menu_edit/:day_id",
+            url: "/menu_edit",
             access: {
                 requiresLogin: true,
             },

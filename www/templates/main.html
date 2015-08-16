@@ -24,21 +24,43 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
+                
                 <ion-item menu-close ng-href="#app/cooks">
                     {{ 'CHANGE_CITY' | translate }}
                 </ion-item>
+                
                 <ion-item menu-close ng-href="#app/my_booking">
                     {{ 'MY_BOOKING' | translate }}
                 </ion-item>
+                
+                <ion-item class="item-divider" ng-show="profile.isChef">
+                    COOK SETTINGS
+                </ion-item>
+                
+                <ion-item menu-close ng-show="profile.isChef" ng-href="#app/schedule_edit">
+                    Schedule 
+                </ion-item>
+                
+                <ion-item menu-close ng-show="profile.isChef" ng-href="#app/menu_edit">
+                    Menu
+                </ion-item>
+                
+                <ion-item class="item-divider">
+                    GENERAL SETTINGS
+                </ion-item>
+                
                 <ion-item menu-close ng-href="#app/profile">
                     {{ 'MY_PROFILE' | translate }}
                 </ion-item>
+                
                 <ion-item ng-click="lang()">
                     {{ 'CHANGE_LANG' | translate }}
                 </ion-item>
+                
                 <ion-item menu-close ng-click="logout()">
                     {{ 'LOGOUT' | translate }}
                 </ion-item>
+                
             </ion-list>
         </ion-content>
     </ion-side-menu>

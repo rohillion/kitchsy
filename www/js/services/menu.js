@@ -47,7 +47,6 @@ kitchsy.factory('Menu', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'A
             //return menus.$getRecord(menuId);
         },
         delete: function (menu) {
-            console.log(menu);
             /*return ref.child('menus')
                 .child(menu.$id)
                 .child("deletedAt").set(Math.floor(Date.now() / 1000));*/

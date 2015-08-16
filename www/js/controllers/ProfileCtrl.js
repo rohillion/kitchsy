@@ -9,12 +9,14 @@
 kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', '$ionicSideMenuDelegate', '$ionicHistory', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher, $ionicSideMenuDelegate, $ionicHistory) {
 
     $scope.showMenuButton = false;
-    
-    console.log('entra');
+
+    $ionicLoading.show({
+        template: 'Loading...'
+    });
 
     Profile.get(Auth.user.uid).then(function (profile) {
+        $ionicLoading.hide();
         $scope.profile = profile;
-        console.log(profile);
         $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
         $ionicHistory.nextViewOptions({
             disableBack: !$scope.showMenuButton
@@ -45,13 +47,19 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
 
         Profile.edit(input).then(function (profile) {
             if (profile) {
-                //$scope.profile.isChef = $scope.profile.username = $scope.profile.name = '';
-                $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-                if(!$scope.showMenuButton){
+                
+                if (!$scope.showMenuButton) {
+                    $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
                     $scope.showMenuButton = true;
                     $ionicSideMenuDelegate.canDragContent(true);
+                    $state.go('app.cooks');
+                } else {
+                    $ionicLoading.show({
+                        template: 'Saved!',
+                        duration: 1000
+                    });
                 }
-                $state.go('app.cooks');
+
             } else {
                 $ionicLoading.hide();
                 alert(profile);

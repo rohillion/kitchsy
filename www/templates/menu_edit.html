@@ -1,18 +1,40 @@
 <ion-view view-title="Menu">
 
-    <ion-nav-title>{{title}}</ion-nav-title>
-
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
     <ion-content>
-
         
+        <label class="item item-input text">
+            <textarea placeholder="Menu description" rows="5" ng-model="$parent.menu.description" ng-Required="true">
+            </textarea>
+        </label>
+
+        <label class="item item-input">
+            <span class="input-label">Price per diner</span>
+            <input type="number" ng-model="$parent.menu.price" style="text-align: right;">
+        </label>
+        
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Min diners
+            </div>
+            <select ng-model="$parent.menu.min" ng-options="option as option.name for option in $parent.guestsRange track by option.id">
+            </select>
+        </label>
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Max diners
+            </div>
+            <select ng-model="$parent.menu.max" ng-options="option as option.name for option in $parent.guestsRange track by option.id">
+            </select>
+        </label>
 
     </ion-content>
 
     <div class="padding stick-to-bottom">
-        <a ng-click="save()" ng-disabled="event.chefs.length < 1" class="button button-block button-flat button-beige">
+        <a ng-click="save()" class="button button-block button-flat button-beige">
             <i class="icon ion-checkmark"></i>
         </a>
     </div>

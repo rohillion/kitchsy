@@ -5,13 +5,16 @@
 
     <ion-content>
 
-        
+        <div collection-repeat="day in $parent.days" class="item item-toggle">
+            {{day.name}}
+            <label class="toggle">
+                <input type="checkbox" ng-change="updateSchedule(day)" ng-model="day.on">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
 
     </ion-content>
 
-    <div class="padding stick-to-bottom">
-        <a ng-click="save()" ng-disabled="event.chefs.length < 1" class="button button-block button-flat button-beige">
-            <i class="icon ion-checkmark"></i>
-        </a>
-    </div>
 </ion-view>
