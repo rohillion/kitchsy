@@ -24,14 +24,13 @@ kitchsy.factory('Menu', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'A
                 return menuRef;
             });
         },
-        edit: function (menu_id, input) {
-            var menu = menusRef.child(menu_id);
+        edit: function (userId, input) {
 
             return $q(function (resolve, reject) {
 
-                return menu.update(input, function (error) {
+                return menusRef.child(userId).update(input, function (error) {
                     if (error) {
-                        console.log('Synchronization failed');
+                        console.log('Menu::edit: failed');
                         reject('Synchronization failed');
                     } else {
                         //Profile.set(input.id, input);

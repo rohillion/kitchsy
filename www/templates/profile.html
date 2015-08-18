@@ -3,7 +3,7 @@
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-show="showMenuButton"></button>
     </ion-nav-buttons>
-    
+
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
@@ -30,6 +30,14 @@
                         </div>
                     </label>
                 </div>
+
+                <label ng-show="$parent.profile.isChef" class="item item-input item-select">
+                    <div class="input-label">
+                        Speciality?
+                    </div>
+                    <select ng-model="$parent.menu.category" ng-options="option as option.$value for option in $parent.categories track by option.$id">
+                    </select>
+                </label>
 
                 <!--<a ng-show="$parent.profile.isChef" class="item item-icon-right" ng-href="#app/schedule_edit">
                     Schedule

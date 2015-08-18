@@ -6,12 +6,17 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', '$ionicSideMenuDelegate', '$ionicHistory', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher, $ionicSideMenuDelegate, $ionicHistory) {
+kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', '$ionicLoading', '$state', '$ionicViewSwitcher', '$ionicSideMenuDelegate', '$ionicHistory', 'Category', function ProfileCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, $ionicLoading, $state, $ionicViewSwitcher, $ionicSideMenuDelegate, $ionicHistory, Category) {
 
     $scope.showMenuButton = false;
 
     $ionicLoading.show({
         template: 'Loading...'
+    });
+    
+    Category.all().then(function(categories){
+        console.log(categories);
+        $scope.categories = categories;
     });
 
     Profile.get(Auth.user.uid).then(function (profile) {
