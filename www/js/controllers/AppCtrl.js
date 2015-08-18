@@ -14,8 +14,22 @@ kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$tran
 
     $scope.user = Auth.user;
 
-    $scope.lang = function () {
-        $translate.use($translate.use() === 'en' ? 'es' : 'en');
+    $scope.lang = function () 
+    {
+        // Change Language
+        //$translate.use($translate.use() === 'en' ? 'es' : 'en');   
+        switch ($translate.use()) 
+        {
+            case 'en' :
+                $translate.use('es'); 
+                break;
+            case 'es' :
+                $translate.use('pt'); 
+                break;
+            case 'pt' :
+                $translate.use('en'); 
+                break;
+        }
     };
 
     $scope.logout = function () {
