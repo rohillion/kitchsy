@@ -13,18 +13,19 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
     $ionicLoading.show({
         template: 'Loading...'
     });
-    
-    Category.all().then(function(categories){
+
+    Category.all().then(function (categories) {
         console.log(categories);
         $scope.categories = categories;
-    });
 
-    Profile.get(Auth.user.uid).then(function (profile) {
-        $ionicLoading.hide();
-        $scope.profile = profile;
-        $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
-        $ionicHistory.nextViewOptions({
-            disableBack: !$scope.showMenuButton
+        Profile.get(Auth.user.uid).then(function (profile) {
+            $ionicLoading.hide();
+            $scope.profile = profile;
+            $scope.profile.category = $scope.categories.$getRecord(profile.category);
+            $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
+            $ionicHistory.nextViewOptions({
+                disableBack: !$scope.showMenuButton
+            });
         });
     });
 
@@ -43,6 +44,7 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
             name: $scope.profile.name,
             username: $scope.profile.username,
             isChef: $scope.profile.isChef,
+            category: $scope.profile.category.$id,
         }
 
         $ionicLoading.show({
@@ -52,7 +54,7 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
 
         Profile.edit(input).then(function (profile) {
             if (profile) {
-                
+
                 if (!$scope.showMenuButton) {
                     $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
                     $scope.showMenuButton = true;

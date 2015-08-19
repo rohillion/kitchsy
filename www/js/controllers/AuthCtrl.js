@@ -46,6 +46,7 @@ kitchsy.controller('AuthCtrl', ['$scope', '$state', 'Auth', 'Profile', '$ionicMo
                 .then(function () {
                     user.city = $scope.user.city;
                     user.isChef = false;
+                    user.category = false;
                     return Profile.create(user);
                 })
                 .then(function () {
