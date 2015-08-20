@@ -1,11 +1,21 @@
-<ion-view view-title="Cook profile">
-    
+<ion-view class="booking_profile" view-title="Cook profile">
+
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
-    
+
     <ion-content>
-        
-        Cook {{$parent.profileID}} profile
-        
+
+        <ion-slide-box>
+            <ion-slide style="background-image: url(img/food2.jpg);">
+            </ion-slide>
+            <ion-slide style="background-image: url(img/food3.jpg);">
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="padding">
+            <h4>{{$parent.title}}</h4>
+            <p>{{$parent.menu.description}}</p>
+        </div>
+
     </ion-content>
 </ion-view>

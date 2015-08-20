@@ -41,8 +41,8 @@ kitchsy.factory('Menu', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'A
 
             });
         },
-        get: function (menuId) {
-            return $firebaseObject(ref.child('menus').child(menuId)).$loaded();
+        get: function (userId) {
+            return $firebaseObject(ref.child('menus').child(userId)).$loaded();
             //return menus.$getRecord(menuId);
         },
         delete: function (menu) {

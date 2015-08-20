@@ -20,6 +20,21 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
     font-size: 1em;
 }
 
+.booking_profile .scroll {
+    height: 100%;
+}
+
+.booking_profile .slider {
+    height: 45%;
+}
+
+.booking_profile ion-slide {
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    background-size:cover;
+    /*-webkit-filter: grayscale(65%);*/
+}
+
 
 /* CUSTOM */
 
@@ -43,14 +58,14 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
     margin-bottom: 0;
 }
 
-.slider-slide .box {
+.slider-custom .box {
     position: absolute;
     top: 18%;
     left: 0;
     right: 0;
 }
 
-.box p {
+.slider-custom .box p {
     padding: 0 40px;
     color: #fff;
     text-align: center;
