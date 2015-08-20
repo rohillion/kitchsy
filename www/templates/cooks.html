@@ -1,5 +1,14 @@
-<ion-view view-title="Kitchsy">
+<ion-view view-title="{{title}} Cooks">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-funnel" ng-click="showFilters()"></button>
+    </ion-nav-buttons>
+
     <ion-content>
+
+        <div class="item-list">
+            <a collection-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}" class="item">{{profile.name}}</a>
+        </div>
 
     </ion-content>
 </ion-view>

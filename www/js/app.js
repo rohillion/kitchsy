@@ -72,6 +72,21 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
+        
+        .state('app.cook', {
+            url: "/cook/:profileID",
+            access: {
+                requiresLogin: true,
+                /*requiredPermissions: ['Admin', 'UserManager'],
+                 permissionType: 'AtLeastOne'*/
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/cook.html",
+                    controller: 'CookCtrl',
+                }
+            }
+        })
 
         .state('app.my_booking', {
             url: "/my_booking",

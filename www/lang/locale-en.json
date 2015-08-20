@@ -3,5 +3,14 @@
     "MY_PROFILE": "My Profile",
     "MY_BOOKING": "My Bookings",
     "CHANGE_LANG": "Change Language",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "BRAZILIAN_FOOD": "Brazilian Food",
+    "CELIAC": "Celiac",
+    "DESSERTS": "Desserts",
+    "MEXICAN_FOOD": "Mexican Food",
+    "PASTA": "Pasta",
+    "PIZZA": "Pizza",
+    "SUSHI": "Sushi",
+    "VEGAN": "Vegan",
+    "VEGETARIAN": "Vegetarian"
 }

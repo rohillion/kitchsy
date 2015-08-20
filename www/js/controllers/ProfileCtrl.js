@@ -14,6 +14,8 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
         template: 'Loading...'
     });
 
+    var categoryProfile = false;
+
     Category.all().then(function (categories) {
         console.log(categories);
         $scope.categories = categories;
@@ -22,6 +24,7 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
             $ionicLoading.hide();
             $scope.profile = profile;
             $scope.profile.category = $scope.categories.$getRecord(profile.category);
+
             $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
             $ionicHistory.nextViewOptions({
                 disableBack: !$scope.showMenuButton

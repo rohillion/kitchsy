@@ -1,0 +1,17 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <!--<button class="button button-icon button-clear ion-android-close" ng-click="filterModalClose()">
+        </button>-->
+        <h3 class="title">Select a category</h3>
+        <button class="button button-icon button-clear ion-ios-close-empty" ng-click="hideFilters()">
+        </button>
+    </ion-header-bar>
+
+    <ion-content>
+        
+        <div class="item-list">
+            <a translate="{{category.$value}}" class="item" collection-repeat="category in $parent.categories" ng-click="updateCookList(category.$id)"></a>
+        </div>
+        
+    </ion-content>
+</ion-modal-view>

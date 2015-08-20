@@ -14,7 +14,9 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
 
 
     var Profile = {
-        //all: profiles,
+        all: function(categoryID){
+            return $firebaseArray(ref.child('profiles').orderByChild("category").equalTo(categoryID)).$loaded();
+        },
         create: function (user) {
             Profile.set(user.uid, user);
             return ref.child('profiles').child(user.uid).set(user);
