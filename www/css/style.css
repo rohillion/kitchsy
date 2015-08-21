@@ -1,14 +1,22 @@
 /* Empty. Add your own CSS if you like */
 /* OVERWRITES */
 
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'AvenirLTStd';
+}
+
+.bar-header .button {
+    color: #84BDAC;
+}
+
 .button.button-calm, .bar.bar-calm {
     border-color: inherit;
     background-color: #84BDAC;
     background-image: none;
 }
 
-button.button.button-icon.button-clear.ion-android-funnel:before {
-    font-size: 1.6em;
+.right-buttons button.button.button-icon.button-clear:before {
+    font-size: 1.5em;
 }
 
 .back-text .previous-title, .back-text .default-title {
@@ -37,6 +45,20 @@ button.button.button-icon.button-clear.ion-android-funnel:before {
 
 
 /* CUSTOM */
+
+@font-face {
+    font-family: AvenirLTStd;
+    src: url("../fonts/AvenirLTStd-Book.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: AvenirLTStdLight;
+    src: url("../fonts/AvenirLTStd-Light.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
 
 .button-flat {
     border: none;
