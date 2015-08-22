@@ -34,7 +34,10 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
             }
         });
     }])
-    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', 'uiGmapGoogleMapApiProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', 'uiGmapGoogleMapApiProvider', '$ionicConfigProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, $ionicConfigProvider) {
+        
+        //Remove the default back text and the previous title on the back button and use a default icon
+        $ionicConfigProvider.backButton.previousTitleText(false).text('').icon('ion-ios-arrow-thin-left');
 
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBL4Xp4ProV6eOky-NQdV2kTQjPMA_zCx8',

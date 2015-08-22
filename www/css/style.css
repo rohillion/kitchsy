@@ -1,7 +1,21 @@
 /* Empty. Add your own CSS if you like */
-/* OVERWRITES */
 
-body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+
+/*** OVERWRITES ***/
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     font-family: 'AvenirLTStd';
 }
 
@@ -9,7 +23,8 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #84BDAC;
 }
 
-.button.button-calm, .bar.bar-calm {
+.button.button-calm,
+.bar.bar-calm {
     border-color: inherit;
     background-color: #84BDAC;
     background-image: none;
@@ -19,12 +34,13 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 1.5em;
 }
 
-.back-text .previous-title, .back-text .default-title {
+.back-text .previous-title,
+.back-text .default-title {
     vertical-align: bottom;
     font-size: 0.8em;
 }
 
-.icon.icon-xs{
+.icon.icon-xs {
     font-size: 1em;
 }
 
@@ -39,12 +55,19 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .booking_profile ion-slide {
     background-repeat: no-repeat;
     background-position: center center fixed;
-    background-size:cover;
+    background-size: cover;
     /*-webkit-filter: grayscale(65%);*/
 }
 
 
-/* CUSTOM */
+/*** CUSTOM ***/
+
+
+/* Colors */
+
+.soft-dark {
+    color: #999;
+}
 
 @font-face {
     font-family: AvenirLTStd;
@@ -93,6 +116,24 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     text-align: center;
 }
 
-.angular-google-map-container { 
-    height: 400px; 
+.angular-google-map-container {
+    height: 400px;
+}
+
+.booking-title {
+    text-align: center;
+}
+
+.avatar-pic {
+    width: 60px;
+    margin: 0 auto;
+}
+
+.avatar-pic > img:first-child {
+    border: 2px solid #fff;
+    max-width: 60px;
+    max-height: 60px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }

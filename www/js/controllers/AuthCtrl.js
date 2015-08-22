@@ -7,7 +7,10 @@ kitchsy.controller('AuthCtrl', ['$scope', '$state', 'Auth', 'Profile', '$ionicMo
         $state.go('app.cooks');
     }
 
-    $scope.user = {};
+    $scope.user = {
+        email:'a@a.com',
+        password:'123'
+    };
 
     $scope.login = function () {
 

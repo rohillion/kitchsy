@@ -4,8 +4,7 @@
 kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Category', '$ionicLoading', '$ionicModal', '$translate', function CookListCtrl($scope, $location, Auth, Profile, Category, $ionicLoading, $ionicModal, $translate) {
 
     $scope.cooks = {};
-    $scope.title = 'Brazilian Food';
-    $scope.category = '7';
+    $scope.category = '5';
 
     $ionicLoading.show({
         template: 'Looking for cooks..'
@@ -19,6 +18,9 @@ kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'C
             console.log(profiles);
             $ionicLoading.hide();
             $scope.profiles = profiles;
+            $translate($scope.categories.$getRecord($scope.category).$value).then(function (title) {
+                $scope.title = title;
+            });
         });
     });
 
