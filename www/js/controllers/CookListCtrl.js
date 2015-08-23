@@ -7,7 +7,7 @@ kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'C
     $scope.category = '5';
 
     $ionicLoading.show({
-        template: 'Looking for cooks..'
+        template: 'Loading cooks..'
     });
 
     Category.all().then(function (categories) {
@@ -27,7 +27,7 @@ kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'C
     $scope.updateCookList = function (categoryID) {
 
         $ionicLoading.show({
-            template: 'Looking for cooks..'
+            template: 'Loading for cooks..'
         });
 
         $translate($scope.categories.$getRecord(categoryID).$value).then(function (title) {

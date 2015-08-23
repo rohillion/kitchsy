@@ -23,6 +23,13 @@ h6,
     color: #84BDAC;
 }
 
+.bar-header {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none;
+    border-bottom: none;
+}
+
 .button.button-calm,
 .bar.bar-calm {
     border-color: inherit;
@@ -59,28 +66,152 @@ h6,
     /*-webkit-filter: grayscale(65%);*/
 }
 
+.stable-bg{
+    background-color: #edefed;
+}
 
-/*** CUSTOM ***/
+.tabs {
+    background-color: transparent;
+    background-image: none;
+}
 
 
-/* Colors */
+/***** CUSTOM *****/
 
-.soft-dark {
-    color: #999;
+
+/*** General */
+
+
+/*Fonts*/
+
+@font-face {
+    font-family: AvenirLTStd;
+    src: url("../fonts/AvenirLTStd-Light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
 }
 
 @font-face {
     font-family: AvenirLTStd;
     src: url("../fonts/AvenirLTStd-Book.otf") format("opentype");
-    font-weight: normal;
+    font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: AvenirLTStdLight;
-    src: url("../fonts/AvenirLTStd-Light.otf") format("opentype");
-    font-weight: normal;
+    font-family: AvenirLTStd;
+    src: url("../fonts/AvenirLTStd-Medium.otf") format("opentype");
+    font-weight: 600;
     font-style: normal;
+}
+
+@font-face {
+    font-family: AvenirLTStd;
+    src: url("../fonts/AvenirLTStd-Heavy.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+.fw-light {
+    font-weight: 300;
+}
+
+.fw-normal {
+    font-weight: 400;
+}
+
+.fw-medium {
+    font-weight: 600;
+}
+
+.fw-bold {
+    font-weight: 700;
+}
+
+
+/*Colors & Misc*/
+
+.shadow {
+    box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.30);
+}
+
+.soft-dark {
+    color: #999;
+}
+
+
+/*Elements*/
+
+.input-group {
+    color: #84BDAC;
+    padding: 6px;
+    text-align: center;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    font-size: 2em;
+}
+
+.input-group label {
+    font-size: 0.7em;
+}
+
+.input-group-addon {
+    padding: 6px 12px;
+    line-height: 1;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.stable-bg .input-group-addon {
+    border-color: #fff;
+}
+
+.stable-bg .input-group-addon:first-child {
+    border-right: 1px solid #f1f1f1;
+    padding-left: 4px;
+}
+
+.stable-bg .input-group-addon:last-child {
+    border-left: 1px solid #f1f1f1;
+    padding-right: 4px;
+}
+
+.form-control {
+    padding: 6px 12px;
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    display: table-cell;
+}
+
+.item-label {
+    color: #565a5c;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.control-picker {
+    margin-bottom: 20px;
+}
+
+.control-picker .padding {
+    padding-top: 5px;
+}
+
+.control-picker .controls {
+    background-color: #fff;
+    border-radius: 4px;
 }
 
 .button-flat {
@@ -97,6 +228,7 @@ h6,
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 5;
 }
 
 .stick-to-bottom .button:last-of-type {
@@ -115,6 +247,9 @@ h6,
     color: #fff;
     text-align: center;
 }
+
+
+/* - end general - */
 
 .angular-google-map-container {
     height: 400px;
@@ -137,3 +272,6 @@ h6,
     height: 100%;
     border-radius: 50%;
 }
+
+
+/* Menu configuration view */

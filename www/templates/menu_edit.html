@@ -3,39 +3,146 @@
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
 
-    <ion-content>
-        
-        <label class="item item-input text">
-            <textarea placeholder="Menu description" rows="5" ng-model="$parent.menu.description" ng-Required="true">
-            </textarea>
-        </label>
+    <ion-pane>
+        <ion-tabs class="tabs-top">
+            <ion-tab title="Menu details">
+                <ion-nav-view name="tab-tab1">
+                    <ion-content class="stable-bg" style="padding-top:15px;">
 
-        <label class="item item-input">
-            <span class="input-label">Price per diner</span>
-            <input type="number" ng-model="$parent.menu.price" style="text-align: right;">
-        </label>
-        
-        <label class="item item-input item-select">
-            <div class="input-label">
-                Min diners
-            </div>
-            <select ng-model="$parent.menu.min" ng-options="option as option.name for option in $parent.guestsRange track by option.id">
-            </select>
-        </label>
+                        <div class="control-picker">
+                            <div class="item-label fw-medium">
+                                Price per diner
+                            </div>
 
-        <label class="item item-input item-select">
-            <div class="input-label">
-                Max diners
-            </div>
-            <select ng-model="$parent.menu.max" ng-options="option as option.name for option in $parent.guestsRange track by option.id">
-            </select>
-        </label>
+                            <div class="padding">
+                                <div class="controls shadow">
+                                    <number-picker value="menu.price" min="min.price" max="max.price"></number-picker>
+                                </div>
+                            </div>
+                        </div>
 
-    </ion-content>
+                        <div class="control-picker">
+                            <div class="item-label fw-medium">
+                                Min diners
+                            </div>
 
-    <div class="padding stick-to-bottom">
-        <a ng-click="save()" class="button button-block button-flat button-beige">
-            <i class="icon ion-checkmark"></i>
-        </a>
-    </div>
+                            <div class="padding">
+                                <div class="controls shadow">
+                                    <number-picker value="menu.min" min="min.guests" max="menu.max" change="onChange()"></number-picker>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-picker">
+                            <div class="item-label fw-medium">
+                                Max diners
+                            </div>
+
+                            <div class="padding">
+                                <div class="controls shadow">
+                                    <number-picker value="menu.max" min="menu.min" max="100"></number-picker>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Menu courses">
+                <ion-nav-view name="tab-tab2">
+                    <ion-content>
+
+                        <div class="item item-toggle">
+                            Starter
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="$parent.menu.starter.on">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="starter" ng-show="$parent.menu.starter.on">
+                            <label class="item item-input" style="border-top: none;">
+                                <input type="text" ng-model="$parent.menu.starter.title" placeholder="Title">
+                            </label>
+                            <label class="item item-input text" style="border-top: none;">
+                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.starter.description" ng-Required="true">
+                                </textarea>
+                            </label>
+                        </div>
+
+                        <div class="item item-toggle">
+                            Main course
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="$parent.menu.main.on">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="mainCourse" ng-show="$parent.menu.main.on">
+                            <label class="item item-input" style="border-top: none;">
+                                <input type="text" ng-model="$parent.menu.main.title" placeholder="Title">
+                            </label>
+                            <label class="item item-input text" style="border-top: none;">
+                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.main.description" ng-Required="true">
+                                </textarea>
+                            </label>
+                        </div>
+
+                        <div class="item item-toggle">
+                            Dessert
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="$parent.menu.dessert.on">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="dessert" ng-show="$parent.menu.dessert.on">
+                            <label class="item item-input" style="border-top: none;">
+                                <input type="text" ng-model="$parent.menu.dessert.title" placeholder="Title">
+                            </label>
+                            <label class="item item-input text" style="border-top: none;">
+                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.dessert.description" ng-Required="true">
+                                </textarea>
+                            </label>
+                        </div>
+
+                        <div class="item item-toggle">
+                            Beverage
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="$parent.menu.beverage.on">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="beverage" ng-show="$parent.menu.beverage.on">
+                            <label class="item item-input" style="border-top: none;">
+                                <input type="text" ng-model="$parent.menu.beverage.title" placeholder="Title">
+                            </label>
+                            <label class="item item-input text" style="border-top: none;">
+                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.beverage.description" ng-Required="true">
+                                </textarea>
+                            </label>
+                        </div>
+                        
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+
+        <div class="padding stick-to-bottom">
+            <a ng-click="save()" class="button button-block button-flat button-beige">
+                <i class="icon ion-checkmark"></i>
+            </a>
+        </div>
+
+    </ion-pane>
 </ion-view>
