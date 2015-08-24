@@ -15,13 +15,37 @@
 
         <div class="padding">
             <h3 class="booking-title dark">{{$parent.title}}</h3>
-            
+
             <div class="avatar-pic">
                 <img src="img/avatar.jpg">
             </div>
+
+            <h5 class="booking-title dark fw-medium">About This Menu</h5>
+
+            <div class="course-box" ng-show="$parent.menu.starter.on">
+                <h5 class="booking-title dark fw-bold">Starter</h5>
+                <h4 class="booking-title dark">{{$parent.menu.starter.title}}</h4>
+                <p class="soft-dark text-centered">{{$parent.menu.starter.description}}</p>
+            </div>
             
-            <h5 class="booking-title dark">About This Menu</h5>
-            <p class="soft-dark">{{$parent.menu.description}}</p>
+            <div class="course-box" ng-show="$parent.menu.main.on">
+                <h5 class="booking-title dark fw-bold">Main Course</h5>
+                <h4 class="booking-title dark">{{$parent.menu.main.title}}</h4>
+                <p class="soft-dark text-centered">{{$parent.menu.main.description}}</p>
+            </div>
+            
+            <div class="course-box" ng-show="$parent.menu.dessert.on">
+                <h5 class="booking-title dark fw-bold">Dessert</h5>
+                <h4 class="booking-title dark">{{$parent.menu.dessert.title}}</h4>
+                <p class="soft-dark text-centered">{{$parent.menu.dessert.description}}</p>
+            </div>
+            
+            <div class="course-box" ng-show="$parent.menu.beverage.on">
+                <h5 class="booking-title dark fw-bold">Beverage</h5>
+                <h4 class="booking-title dark">{{$parent.menu.beverage.title}}</h4>
+                <p class="soft-dark text-centered">{{$parent.menu.beverage.description}}</p>
+            </div>
+
         </div>
 
     </ion-content>

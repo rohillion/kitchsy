@@ -6,11 +6,11 @@
     <ion-pane>
         <ion-tabs class="tabs-top">
             <ion-tab title="Menu details">
-                <ion-nav-view name="tab-tab1">
-                    <ion-content class="stable-bg" style="padding-top:15px;">
+                <ion-nav-view class="stable-bg" name="tab-tab1">
+                    <ion-content class="bottom-sticked" style="padding-top:15px;">
 
                         <div class="control-picker">
-                            <div class="item-label fw-medium">
+                            <div class="item-label fw-medium dark">
                                 Price per diner
                             </div>
 
@@ -22,19 +22,19 @@
                         </div>
 
                         <div class="control-picker">
-                            <div class="item-label fw-medium">
+                            <div class="item-label fw-medium dark">
                                 Min diners
                             </div>
 
                             <div class="padding">
                                 <div class="controls shadow">
-                                    <number-picker value="menu.min" min="min.guests" max="menu.max" change="onChange()"></number-picker>
+                                    <number-picker value="menu.min" min="min.guests" max="menu.max"></number-picker>
                                 </div>
                             </div>
                         </div>
 
                         <div class="control-picker">
-                            <div class="item-label fw-medium">
+                            <div class="item-label fw-medium dark">
                                 Max diners
                             </div>
 
@@ -50,95 +50,103 @@
             </ion-tab>
 
             <ion-tab title="Menu courses">
-                <ion-nav-view name="tab-tab2">
-                    <ion-content>
+                <ion-nav-view class="stable-bg" name="tab-tab2">
+                    <ion-content class="bottom-sticked">
 
-                        <div class="item item-toggle">
-                            Starter
-                            <label class="toggle">
-                                <input type="checkbox" ng-model="$parent.menu.starter.on">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
+                        <div class="card">
+                            <div class="item item-toggle">
+                                Starter
+                                <label class="toggle">
+                                    <input type="checkbox" ng-model="$parent.menu.starter.on">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div id="starter" ng-show="$parent.menu.starter.on">
+                                <label class="item item-input" style="border-top: none;">
+                                    <input type="text" ng-model="$parent.menu.starter.title" placeholder="Title">
+                                </label>
+                                <label class="item item-input text" style="border-top: none;">
+                                    <textarea placeholder="Description" rows="4" ng-model="$parent.menu.starter.description" ng-Required="true">
+                                    </textarea>
+                                </label>
+                            </div>
                         </div>
 
-                        <div id="starter" ng-show="$parent.menu.starter.on">
-                            <label class="item item-input" style="border-top: none;">
-                                <input type="text" ng-model="$parent.menu.starter.title" placeholder="Title">
-                            </label>
-                            <label class="item item-input text" style="border-top: none;">
-                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.starter.description" ng-Required="true">
-                                </textarea>
-                            </label>
+                        <div class="card">
+                            <div class="item item-toggle">
+                                Main course
+                                <label class="toggle">
+                                    <input type="checkbox" ng-model="$parent.menu.main.on">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div id="mainCourse" ng-show="$parent.menu.main.on">
+                                <label class="item item-input" style="border-top: none;">
+                                    <input type="text" ng-model="$parent.menu.main.title" placeholder="Title">
+                                </label>
+                                <label class="item item-input text" style="border-top: none;">
+                                    <textarea placeholder="Description" rows="4" ng-model="$parent.menu.main.description" ng-Required="true">
+                                    </textarea>
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="item item-toggle">
-                            Main course
-                            <label class="toggle">
-                                <input type="checkbox" ng-model="$parent.menu.main.on">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
+                        <div class="card">
+                            <div class="item item-toggle">
+                                Dessert
+                                <label class="toggle">
+                                    <input type="checkbox" ng-model="$parent.menu.dessert.on">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div id="dessert" ng-show="$parent.menu.dessert.on">
+                                <label class="item item-input" style="border-top: none;">
+                                    <input type="text" ng-model="$parent.menu.dessert.title" placeholder="Title">
+                                </label>
+                                <label class="item item-input text" style="border-top: none;">
+                                    <textarea placeholder="Description" rows="4" ng-model="$parent.menu.dessert.description" ng-Required="true">
+                                    </textarea>
+                                </label>
+                            </div>
                         </div>
 
-                        <div id="mainCourse" ng-show="$parent.menu.main.on">
-                            <label class="item item-input" style="border-top: none;">
-                                <input type="text" ng-model="$parent.menu.main.title" placeholder="Title">
-                            </label>
-                            <label class="item item-input text" style="border-top: none;">
-                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.main.description" ng-Required="true">
-                                </textarea>
-                            </label>
+                        <div class="card">
+                            <div class="item item-toggle">
+                                Beverage
+                                <label class="toggle">
+                                    <input type="checkbox" ng-model="$parent.menu.beverage.on">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div id="beverage" ng-show="$parent.menu.beverage.on">
+                                <label class="item item-input" style="border-top: none;">
+                                    <input type="text" ng-model="$parent.menu.beverage.title" placeholder="Title">
+                                </label>
+                                <label class="item item-input text" style="border-top: none;">
+                                    <textarea placeholder="Description" rows="4" ng-model="$parent.menu.beverage.description" ng-Required="true">
+                                    </textarea>
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="item item-toggle">
-                            Dessert
-                            <label class="toggle">
-                                <input type="checkbox" ng-model="$parent.menu.dessert.on">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div id="dessert" ng-show="$parent.menu.dessert.on">
-                            <label class="item item-input" style="border-top: none;">
-                                <input type="text" ng-model="$parent.menu.dessert.title" placeholder="Title">
-                            </label>
-                            <label class="item item-input text" style="border-top: none;">
-                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.dessert.description" ng-Required="true">
-                                </textarea>
-                            </label>
-                        </div>
-
-                        <div class="item item-toggle">
-                            Beverage
-                            <label class="toggle">
-                                <input type="checkbox" ng-model="$parent.menu.beverage.on">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div id="beverage" ng-show="$parent.menu.beverage.on">
-                            <label class="item item-input" style="border-top: none;">
-                                <input type="text" ng-model="$parent.menu.beverage.title" placeholder="Title">
-                            </label>
-                            <label class="item item-input text" style="border-top: none;">
-                                <textarea placeholder="Description" rows="4" ng-model="$parent.menu.beverage.description" ng-Required="true">
-                                </textarea>
-                            </label>
-                        </div>
-                        
                     </ion-content>
                 </ion-nav-view>
             </ion-tab>
         </ion-tabs>
 
-        <div class="padding stick-to-bottom">
+        <div class="padding stick-to-bottom soft-edge">
             <a ng-click="save()" class="button button-block button-flat button-beige">
                 <i class="icon ion-checkmark"></i>
             </a>

@@ -6,32 +6,31 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicL
     $ionicLoading.show({
         template: 'Loading...'
     });
-    
+
     $scope.min = {
-        price:1,
-        guests:1
-    }
-    
-    $scope.max = {
-        price:100,
-        guests:100
+        price: 1,
+        guests: 1
     }
 
-    $scope.onChange = function () {
-        console.log($scope.menu.min);
-    };
+    $scope.max = {
+        price: 100,
+        guests: 100
+    }
 
     Menu.get(Auth.user.uid).then(function (menu) {
         if (menu.price) {
 
             $scope.menu = {
-                description: menu.description,
                 price: menu.price,
                 min: menu.min,
-                max: menu.max
+                max: menu.max,
+                starter: menu.starter,
+                main: menu.main,
+                dessert: menu.dessert,
+                beverage: menu.beverage
             }
 
-            $scope.$watch('menu.min',function(newValue){
+            $scope.$watch('menu.min', function (newValue) {
                 console.log(newValue);
             });
 
@@ -42,18 +41,33 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicL
                 template: 'Creating menu...'
             });
 
-            menu.price = 0;
+            menu.price = 15;
             menu.description = '';
             menu.max = 15;
             menu.min = 5;
+            menu.starter = {
+                on: false
+            };
+            menu.main = {
+                on: false
+            };
+            menu.dessert = {
+                on: false
+            };
+            menu.beverage = {
+                on: false
+            };
 
             menu.$save().then(function () {
 
                 $scope.menu = {
-                    description: menu.description,
                     price: menu.price,
                     min: menu.min,
-                    max: menu.max
+                    max: menu.max,
+                    starter: menu.starter,
+                    main: menu.main,
+                    dessert: menu.dessert,
+                    beverage: menu.beverage
                 };
 
                 $ionicLoading.hide();
@@ -69,9 +83,12 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicL
 
             Menu.edit(Auth.user.uid, {
                 price: $scope.menu.price,
-                //description: $scope.menu.description,
                 max: $scope.menu.max,
-                min: $scope.menu.min
+                min: $scope.menu.min,
+                starter: $scope.menu.starter,
+                main: $scope.menu.main,
+                dessert: $scope.menu.dessert,
+                beverage: $scope.menu.beverage
             }).then(function () {
                 $ionicLoading.hide();
             });
