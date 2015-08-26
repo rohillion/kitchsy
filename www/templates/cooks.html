@@ -7,7 +7,7 @@
     <ion-content>
 
         <div class="item-list">
-            <a collection-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}" class="item">{{profile.name}}</a>
+            <a collection-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}" class="item">{{profile.name}} -  {{profile.reviews.length}} Reviews</a>
         </div>
 
     </ion-content>

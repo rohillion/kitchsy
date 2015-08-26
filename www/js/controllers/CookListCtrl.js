@@ -1,42 +1,61 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Category', '$ionicLoading', '$ionicModal', '$translate', function CookListCtrl($scope, $location, Auth, Profile, Category, $ionicLoading, $ionicModal, $translate) {
+kitchsy.controller('CookListCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Review', 'Category', '$ionicLoading', '$ionicModal', '$translate', function CookListCtrl($scope, $location, Auth, Profile, Review, Category, $ionicLoading, $ionicModal, $translate) {
+
+    var loadingOpts = {
+        template: 'Loading for cooks..'
+    }
 
     $scope.cooks = {};
     $scope.category = '5';
 
-    $ionicLoading.show({
-        template: 'Loading cooks..'
-    });
+    $ionicLoading.show(loadingOpts);
+
+    var listCooks = function (profiles) {
+        $scope.profiles = [];
+        angular.forEach(profiles, function (value, key) {
+            if (value.isChef) {
+                Review.get(value.$id).then(function (reviews) {
+                    value.reviews = reviews;
+                    $scope.profiles.push(value);
+                    console.log($scope.profiles);
+                });
+            }
+        });
+    };
 
     Category.all().then(function (categories) {
-        console.log(categories);
+
         $scope.categories = categories;
 
         Profile.all($scope.category).then(function (profiles) {
-            console.log(profiles);
-            $ionicLoading.hide();
-            $scope.profiles = profiles;
+
+            listCooks(profiles);
+
             $translate($scope.categories.$getRecord($scope.category).$value).then(function (title) {
                 $scope.title = title;
+            });
+
+            $ionicLoading.hide();
+
+            profiles.$watch(function (profiles) {
+                listCooks(profiles);
             });
         });
     });
 
     $scope.updateCookList = function (categoryID) {
 
-        $ionicLoading.show({
-            template: 'Loading for cooks..'
-        });
+        $ionicLoading.show(loadingOpts);
 
         $translate($scope.categories.$getRecord(categoryID).$value).then(function (title) {
             $scope.title = title;
         });
 
         Profile.all(categoryID).then(function (profiles) {
+            listCooks(profiles);
             $ionicLoading.hide();
-            $scope.profiles = profiles;
         });
 
         $scope.filterModal.hide();
