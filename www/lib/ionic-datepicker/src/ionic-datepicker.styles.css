@@ -1,4 +1,9 @@
-/* Empty. Add your own CSS if you like */
+.selected_date_full {
+  color: #387EF5;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 5px;
+}
 
 .color_blue {
   color: rgb(56, 126, 245) !important;
@@ -24,11 +29,6 @@
 
 .date_cell {
   padding: 5px;
-}
-
-.error_msg {
-  color: #cc0000 !important;
-  font-size: 12px;
 }
 
 .date_selected {
@@ -75,4 +75,27 @@
 
 .right_arrow {
 
+}
+.ionic_datepicker_modal_content .selected_date_full {
+  font-size: 20px;
+}
+.font_22px {
+  font-size: 22px;
+}
+.ionic_datepicker_modal_content {
+  padding-top: 10%;
+}
+.ionic_datepicker_modal_content .selected_date_full{
+  padding: 20px;
+}
+@media (min-width: 680px) {
+  .ionic_datepicker_modal_content {
+    padding-top: 0;
+  }
+  .ionic_datepicker_modal_content .selected_date_full {
+    font-size: inherit;
+  }
+  .ionic_datepicker_modal_content .selected_date_full{
+    padding: 10px 0 0 0;
+  }
 }

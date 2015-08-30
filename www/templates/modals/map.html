@@ -1,30 +1,42 @@
 <ion-modal-view>
-    
+
     <ion-header-bar>
         <h3 class="title">Place</h3>
-        <button class="button button-icon button-clear ion-ios-close-empty" ng-click="closeModal()">
+        <button class="button button-icon button-clear ion-ios-close-empty" ng-click="closePlaceModal()">
         </button>
     </ion-header-bar>
 
-    <ion-content>
-        <div class="list">
+    <ion-content scroll="false">
+        
+        
 
-            <div class="item item-input-inset" style="border-top:none;">
-                <label class="item-input-wrapper">
-                    <i class="icon ion-ios-search placeholder-icon"></i>
-                    <input type="search" placeholder="Search address..">
-                </label>
-            </div>
-            
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <!--<script type="text/ng-template" id="searchbox.tpl.html">
+            <input id="autocomplete" type="search" placeholder="Search address.." ng-focus="$parent.disableTap()">
+        </script>
 
+        <div class="item item-input-inset" style="border-top:none;">
+            <label id="searchBoxParent" class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+            </label>
         </div>
+        
+        
+
+        <ui-gmap-google-map ng-if="mapLoaded" center='map.center' zoom='map.zoom' options="map.options">
+
+            <ui-gmap-search-box template="map.searchbox.template" events="map.searchbox.events" parentdiv="'searchBoxParent'">
+            </ui-gmap-search-box>
+
+            <ui-gmap-marker ng-if="!map.marker.hidden" coords="map.marker.coords" idkey="map.marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>-->
+
     </ion-content>
-    
-    <div class="padding stick-to-bottom">
-        <a ng-click="save()" ng-disabled="event.coords" class="button button-block button-flat button-calm">
+
+    <!--<div class="padding stick-to-bottom">
+        <a ng-click="setPosition()" class="button button-block button-flat button-calm">
             <i class="icon ion-checkmark"></i>
         </a>
-    </div>
-    
+    </div>-->
+
 </ion-modal-view>

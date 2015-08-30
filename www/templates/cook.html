@@ -4,7 +4,7 @@
         <button class="button button-icon button-clear ion-ios-upload-outline" ng-click=""></button>
     </ion-nav-buttons>
 
-    <ion-content>
+    <ion-content class="bottom-sticked-thin">
 
         <ion-slide-box>
             <ion-slide style="background-image: url(img/food2.jpg);">
@@ -19,7 +19,7 @@
             <div class="cook-rating">
                 {{$parent.stars}} stars
             </div>
-            
+
             <div class="avatar-pic">
                 <img src="img/avatar.jpg">
             </div>
@@ -31,19 +31,19 @@
                 <h4 class="booking-title dark">{{$parent.menu.starter.title}}</h4>
                 <p class="soft-dark text-centered">{{$parent.menu.starter.description}}</p>
             </div>
-            
+
             <div class="course-box" ng-show="$parent.menu.main.on">
                 <h5 class="booking-title dark fw-bold">Main Course</h5>
                 <h4 class="booking-title dark">{{$parent.menu.main.title}}</h4>
                 <p class="soft-dark text-centered">{{$parent.menu.main.description}}</p>
             </div>
-            
+
             <div class="course-box" ng-show="$parent.menu.dessert.on">
                 <h5 class="booking-title dark fw-bold">Dessert</h5>
                 <h4 class="booking-title dark">{{$parent.menu.dessert.title}}</h4>
                 <p class="soft-dark text-centered">{{$parent.menu.dessert.description}}</p>
             </div>
-            
+
             <div class="course-box" ng-show="$parent.menu.beverage.on">
                 <h5 class="booking-title dark fw-bold">Beverage</h5>
                 <h4 class="booking-title dark">{{$parent.menu.beverage.title}}</h4>
@@ -53,4 +53,9 @@
         </div>
 
     </ion-content>
+
+    <div class="bar bar-footer bar-calm" ng-click="book()">
+        <div class="title">Book Cook</div>
+    </div>
+
 </ion-view>

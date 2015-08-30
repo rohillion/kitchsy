@@ -1,0 +1,53 @@
+<ion-view class="stable-bg" view-title="Booking">
+
+    <ion-content class="bottom-sticked-thin" style="padding-top: 15px;">
+
+        <div class="control-picker">
+            <div class="item-label fw-medium dark">
+                Date
+            </div>
+
+            <div class="padding">
+                <div class="controls shadow">
+                    <ionic-datepicker input-obj="datepickerObject">
+                        <div class="input-group">
+                            <label class="form-control">{{$parent.booking.date | date:'dd - MMMM - yyyy'}}</label>
+                        </div>
+                    </ionic-datepicker>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-picker">
+            <div class="item-label fw-medium dark">
+                Place
+            </div>
+
+            <div class="padding">
+                <div class="controls shadow">
+                    <label class="form-control">
+                        <ion-google-place class="input-group" ng-if="mapLoaded" placeholder="Enter your address" ng-model="placeApi.place" />
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-picker">
+            <div class="item-label fw-medium dark">
+                Attendees
+            </div>
+
+            <div class="padding">
+                <div class="controls shadow">
+                    <number-picker value="booking.attendes" min="menu.min" max="menu.max"></number-picker>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <div class="bar bar-footer bar-calm" ng-click="bookConfirm()">
+        <div class="title">Confirm Booking</div>
+    </div>
+
+</ion-view>

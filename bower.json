@@ -16,7 +16,8 @@
     "angular-translate-storage-cookie": "~2.7.2",
     "angular-translate-storage-local": "~2.7.2",
     "angular-local-storage": "~0.2.2",
-    "ionic-datepicker": "~0.6.0",
-    "angular-google-maps": "~2.1.5"
+    "angular-google-maps": "~2.1.5",
+    "ionic-datepicker": "~0.9.0",
+    "ion-google-place": "~0.0.1"
   }
 }

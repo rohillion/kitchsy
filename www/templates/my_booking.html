@@ -5,10 +5,10 @@
 
     <ion-content>
 
-        <ion-list can-swipe="true">
-            <ion-item class="item" collection-repeat="event in $parent.events" ng-click="editEvent(event.$id)">
-                {{event.title}}
-                <ion-option-button class="button-assertive" ng-click="$parent.events.$remove(event)">
+        <ion-list>
+            <ion-item class="item" collection-repeat="booking in $parent.bookings">
+                {{booking.$value}}
+                <ion-option-button class="button-assertive" >
                     Delete
                 </ion-option-button>
             </ion-item>

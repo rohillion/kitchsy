@@ -1,6 +1,4 @@
 /* Empty. Add your own CSS if you like */
-
-
 /*** OVERWRITES ***/
 
 body,
@@ -65,8 +63,6 @@ h6,
     background-size: cover;
     /*-webkit-filter: grayscale(65%);*/
 }
-
-
 /*.stable-bg{
     background-color: #edefed;
 }*/
@@ -97,14 +93,8 @@ h6,
 .dark {
     color: #565a5c;
 }
-
-
 /***** CUSTOM *****/
-
-
 /*** General */
-
-
 /*Fonts*/
 
 @font-face {
@@ -150,8 +140,6 @@ h6,
 .fw-bold {
     font-weight: 700;
 }
-
-
 /*Colors & Misc*/
 
 .shadow {
@@ -170,12 +158,19 @@ h6,
     text-align: center;
 }
 
+.bottom-sticked {
+    bottom: 70px;
+}
 
+.bottom-sticked-thin {
+    bottom: 50px;
+}
 /*Elements*/
 
 .input-group {
-    color: #84BDAC;
-    padding: 6px;
+    width: 100%;
+    color: #84BDAC!important;
+    padding: 6px 0;
     text-align: center;
     position: relative;
     display: table;
@@ -184,11 +179,10 @@ h6,
 }
 
 .input-group label {
-    font-size: 0.7em;
+    font-size: 0.6em;
 }
 
 .input-group-addon {
-    padding: 6px 12px;
     line-height: 1;
     text-align: center;
     border-style: solid;
@@ -197,24 +191,20 @@ h6,
     white-space: nowrap;
     vertical-align: middle;
     display: table-cell;
-}
-
-.stable-bg .input-group-addon {
     border-color: #fff;
 }
 
-.stable-bg .input-group-addon:first-child {
+.input-group-addon:first-child {
     border-right: 1px solid #f1f1f1;
-    padding-left: 4px;
 }
 
-.stable-bg .input-group-addon:last-child {
+.input-group-addon:last-child {
     border-left: 1px solid #f1f1f1;
-    padding-right: 4px;
 }
 
 .form-control {
     padding: 6px 12px;
+    display: block;
 }
 
 .input-group .form-control {
@@ -277,12 +267,10 @@ h6,
     color: #fff;
     text-align: center;
 }
-
-
 /* - end general - */
 
 .angular-google-map-container {
-    height: 400px;
+    height: 500px;
 }
 
 .booking-title {
@@ -302,22 +290,12 @@ h6,
     height: 100%;
     border-radius: 50%;
 }
-
-
 /* Menu configuration view */
-
-.bottom-sticked {
-    bottom: 70px;
-}
-
-
 /* Menu offer view */
 
 .course-box {
     margin-top: 40px;
 }
-
-
 /* Category Picker */
 
 .image-list .image {
@@ -332,4 +310,12 @@ h6,
     padding: 0;
     line-height: 200px;
     /*-webkit-filter: grayscale(65%);*/
+}
+
+#autocomplete {
+    width: 100%;
+}
+
+.pac-container {
+    pointer-events: all;
 }

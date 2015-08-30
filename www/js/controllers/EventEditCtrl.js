@@ -2,7 +2,7 @@
 'use strict';
 
 kitchsy.controller('EventEditCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', 'Event', '$ionicModal', 'moment', '$ionicLoading', '$ionicNavBarDelegate', 'uiGmapGoogleMapApi', function EventEditCtrl($scope, $state, $stateParams, Auth, Profile, Event, $ionicModal, moment, $ionicLoading, $ionicNavBarDelegate, uiGmapGoogleMapApi) {
-    
+     
     uiGmapGoogleMapApi.then(function(maps) {
         
     });
