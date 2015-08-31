@@ -1,7 +1,7 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking',  'CookBooking', 'ClientBooking', function BookCtrl($scope, $state, $stateParams, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking) {
+kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking', 'CookBooking', 'ClientBooking', function BookCtrl($scope, $state, $stateParams, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking) {
 
     $ionicLoading.show({
         template: 'Loading...'
@@ -69,19 +69,24 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
     };
 
     $scope.bookConfirm = function () {
-        
+
+        $ionicLoading.show({
+            template: 'Booking...'
+        });
+
         Booking.create($scope.booking).then(function (booking) {
-            
+
             CookBooking.create({
-                user:$scope.booking.cookId,
-                booking:booking.key()
+                user: $scope.booking.cookId,
+                booking: booking.key()
             });
-            
+
             ClientBooking.create({
-                user:$scope.booking.clientId,
-                booking:booking.key()
+                user: $scope.booking.clientId,
+                booking: booking.key()
             });
             
+            $ionicLoading.hide();
         });
     };
 
