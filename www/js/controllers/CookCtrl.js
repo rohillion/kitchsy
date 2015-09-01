@@ -6,9 +6,15 @@
  * - retrieves and persists the model via the $firebaseArray service
  * - exposes the model to the template and provides event handlers
  */
-kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$translate', 'Profile', 'Review', '$stateParams', '$state', 'Menu', 'Category', function CookCtrl($scope, $ionicModal, moment, Auth, $translate, Profile, Review, $stateParams, $state, Menu, Category) {
+kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'moment', 'Auth', '$translate', 'Profile', 'Review', '$stateParams', '$state', 'Menu', 'Category', function CookCtrl($scope, $ionicModal, $ionicLoading, moment, Auth, $translate, Profile, Review, $stateParams, $state, Menu, Category) {
 
     $scope.stars = 0;
+    $scope.cookID = $stateParams.profileID;
+    $scope.userID = Auth.user.uid;
+    
+    $ionicLoading.show({
+        'template':'Loading...'
+    });
 
     Category.all().then(function (categories) {
 
@@ -27,6 +33,7 @@ kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$tra
                     Menu.get(profile.id).then(function (menu) {
                         $scope.title = 'Eat ' + category.toLocaleLowerCase() + ' with ' + profile.name;
                         $scope.menu = menu;
+                        $ionicLoading.hide();
                     });
                 });
             });

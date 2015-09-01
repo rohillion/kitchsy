@@ -10,12 +10,14 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
     $scope.placeApi = {
         place: {}
     };
+    
+    
 
     $scope.mapLoaded = false;
 
     uiGmapGoogleMapApi.then(function () {
         $scope.mapLoaded = true;
-
+        
         $scope.$watch('placeApi.place', function (change) {
             console.log(change);
             if (change.geometry) {
@@ -29,6 +31,7 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
         Profile.get($stateParams.profileID).then(function (profile) {
 
             Menu.get(profile.id).then(function (menu) {
+                console.log($scope.placeApi.place.geometry);
                 $scope.menu = menu;
                 $scope.booking.attendes = menu.min;
                 $ionicLoading.hide();
@@ -67,8 +70,27 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
             $scope.booking.date = new Date(val);
         }
     };
+    
+    $ionicModal.fromTemplateUrl('templates/modals/booking_confirmation.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.confirmationModal = modal;
+    });
 
-    $scope.bookConfirm = function () {
+    $scope.showConfirmation = function () {
+        $scope.confirmationModal.show();
+    };
+
+    $scope.hideConfirmation = function () {
+        $scope.confirmationModal.hide();
+    };
+
+    $scope.$on('modal.hidden', function () {
+        //$scope.user.city = '';
+    });
+
+    $scope.book = function () {
 
         $ionicLoading.show({
             template: 'Booking...'
@@ -87,6 +109,7 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
             });
             
             $ionicLoading.hide();
+            $scope.hideConfirmation();
         });
     };
 

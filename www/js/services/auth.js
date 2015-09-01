@@ -12,7 +12,7 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
         },
         login: function (user) {
             //return auth.$authWithPassword(user);
-            return auth.$authWithPassword({email:'a@a.com',password:'123'});
+            return auth.$authWithPassword({email:'b@b.com',password:'123'});
         },
         logout: function () {
             auth.$unauth();

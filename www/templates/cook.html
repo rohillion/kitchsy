@@ -4,7 +4,7 @@
         <button class="button button-icon button-clear ion-ios-upload-outline" ng-click=""></button>
     </ion-nav-buttons>
 
-    <ion-content class="bottom-sticked-thin">
+    <ion-content ng-class="{'bottom-sticked-thin' : $parent.userID != $parent.cookID}">
 
         <ion-slide-box>
             <ion-slide style="background-image: url(img/food2.jpg);">
@@ -54,7 +54,7 @@
 
     </ion-content>
 
-    <div class="bar bar-footer bar-calm" ng-click="book()">
+    <div class="bar bar-footer bar-calm" ng-if="userID != cookID" ng-click="book()">
         <div class="title">Book Cook</div>
     </div>
 
