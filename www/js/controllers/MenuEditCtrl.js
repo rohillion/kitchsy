@@ -1,7 +1,23 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicLoading', function MenuEditCtrl($scope, $state, Auth, Menu, $ionicLoading) {
+kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicLoading', '$cordovaImagePicker', function MenuEditCtrl($scope, $state, Auth, Menu, $ionicLoading, $cordovaImagePicker) {
+
+    var options = {
+        maximumImagesCount: 10,
+        width: 800,
+        height: 800,
+        quality: 80
+    };
+
+    $cordovaImagePicker.getPictures(options)
+        .then(function (results) {
+            for (var i = 0; i < results.length; i++) {
+                console.log('Image URI: ' + results[i]);
+            }
+        }, function (error) {
+            // error getting photos
+        });
 
     $ionicLoading.show({
         template: 'Loading...'
