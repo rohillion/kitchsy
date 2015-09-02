@@ -49,15 +49,15 @@ h6,
     font-size: 1em;
 }
 
-.booking_profile .scroll {
+.slide-background-fix .scroll {
     height: 100%;
 }
 
-.booking_profile .slider {
+.slide-background-fix .slider {
     height: 45%;
 }
 
-.booking_profile ion-slide {
+.slide-background-fix ion-slide {
     background-repeat: no-repeat;
     background-position: center center fixed;
     background-size: cover;

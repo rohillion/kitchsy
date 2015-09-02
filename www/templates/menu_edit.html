@@ -1,4 +1,4 @@
-<ion-view view-title="Menu">
+<ion-view view-title="Menu" class="slide-background-fix">
 
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
@@ -8,6 +8,11 @@
             <ion-tab title="Menu details">
                 <ion-nav-view class="stable-bg" name="tab-tab1">
                     <ion-content class="bottom-sticked" style="padding-top:15px;">
+
+                        <ion-slide-box ng-click="showImagePickerModal()">
+                            <ion-slide ng-repeat="image in menu.images" style="background-image: url('{{image.$value}}');">
+                            </ion-slide>
+                        </ion-slide-box>
 
                         <div class="control-picker">
                             <div class="item-label fw-medium dark">
