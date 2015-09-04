@@ -12,7 +12,6 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
     };
     
     
-
     $scope.mapLoaded = false;
 
     uiGmapGoogleMapApi.then(function () {

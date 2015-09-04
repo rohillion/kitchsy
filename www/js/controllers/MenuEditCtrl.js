@@ -10,9 +10,7 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         quality: 80
     };
 
-    $scope.images = ['http://placehold.it/50x50', 'img/food2.jpg', 'img/food3.jpg'];
-
-
+    $scope.images = [];
 
     $scope.loadImages = function () {
         for (var i = 0; i < 0; i++) {
@@ -28,21 +26,11 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         if (window.cordova) {
             $cordovaImagePicker.getPictures(options).then(function (results) {
                 for (var i = 0; i < results.length; i++) {
-
-                    ImageUploadService(results[i]).then(function (something) {
-                        console.log(something);
+                    $scope.images.push({
+                        id: i,
+                        src: results[i]
                     });
                     //$scope.$apply();
-                    /*ImageEncoder.get(results[i], function (encodedUrl) {
-
-                        $scope.images.push({
-                            id: i,
-                            src: encodedUrl
-                        });
-
-                        $scope.$apply();
-
-                    }, 'image/jpeg');*/
                 }
             }, function (error) {
                 console.log(error);
@@ -132,7 +120,6 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function (modal) {
-            //$scope.loadImages();
             $scope.imagePicker = modal;
         });
 
@@ -150,29 +137,35 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
 
         $scope.save = function () {
 
-            $ionicLoading.show({
-                template: 'Saving changes...'
-            });
+            ImageUploadService($scope.images).then(function (images) {
 
-            Menu.edit(Auth.user.uid, {
-                price: $scope.menu.price,
-                max: $scope.menu.max,
-                min: $scope.menu.min,
-                starter: $scope.menu.starter,
-                main: $scope.menu.main,
-                dessert: $scope.menu.dessert,
-                beverage: $scope.menu.beverage
-            }).then(function () {
+                $ionicLoading.show({
+                    template: 'Saving changes...'
+                });
 
-                /*var i = 0;
-                angular.forEach($scope.images, function (value, key) {
-                    Image.create(Auth.user.uid, value.src).then(function () {
-                        if (i = $scope.images.length)
-                            $ionicLoading.hide();
-                        i++;
+                Menu.edit(Auth.user.uid, {
+                    price: $scope.menu.price,
+                    max: $scope.menu.max,
+                    min: $scope.menu.min,
+                    starter: $scope.menu.starter,
+                    main: $scope.menu.main,
+                    dessert: $scope.menu.dessert,
+                    beverage: $scope.menu.beverage
+                }).then(function () {
+
+                    var i = 1;
+                    angular.forEach(images, function (value, key) {
+                        Image.create(Auth.user.uid, value.url).then(function () {
+                            if (i === images.length)
+                                $ionicLoading.hide();
+                            i++;
+                        });
                     });
-                });*/
 
+                });
+                
+            }).then(function(error){
+                console.log(error);
             });
         }
     });
