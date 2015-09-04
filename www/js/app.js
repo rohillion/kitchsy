@@ -36,7 +36,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
         });
     }])
     .config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 'localStorageServiceProvider', 'uiGmapGoogleMapApiProvider', '$ionicConfigProvider', function ($stateProvider, $urlRouterProvider, $translateProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, $ionicConfigProvider) {
-        
+
         //Remove the default back text and the previous title on the back button and use a default icon
         $ionicConfigProvider.backButton.previousTitleText(false).text('').icon('ion-ios-arrow-thin-left');
 
@@ -76,7 +76,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.cook', {
             url: "/cook/:profileID",
             access: {
@@ -91,7 +91,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.book', {
             url: "/book/:profileID",
             access: {
@@ -132,7 +132,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.menu_edit', {
             url: "/menu_edit",
             access: {
@@ -145,7 +145,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
-        
+
         .state('app.profile', {
             url: "/profile",
             access: {
@@ -172,4 +172,8 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
 
             }])
     .constant('moment', moment)
+    .constant('CLOUDINARY_CONFIGS', {
+        API_URL: 'https://api.cloudinary.com/v1_1/kitchsy/image/upload',
+        UPLOAD_PRESET: 'krosjmtm'
+    })
     .constant('FIREBASE_URL', 'https://kitchsy.firebaseio.com/');
