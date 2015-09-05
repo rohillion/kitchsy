@@ -11,7 +11,7 @@ kitchsy.factory('Image', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
     var ref = new Firebase(FIREBASE_URL);
 
     var Image = {
-        all: function(userId){
+        all: function (userId) {
             return $firebaseArray(ref.child('images').child(userId)).$loaded();
         },
         create: function (userId, src) {
@@ -33,11 +33,8 @@ kitchsy.factory('Image', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
             });
 
         },
-        delete: function (userID) {
-            localStorageService.remove(userID);
-            return ref.child('profiles')
-                .child(userID)
-                .child("deletedAt").set(Math.floor(Date.now() / 1000));
+        delete: function (userId, image) {
+            return $firebaseArray(ref.child('images').child(userId)).$remove(image);
         }
     };
 

@@ -7,15 +7,15 @@
         <ion-tabs class="tabs-top">
             <ion-tab title="Menu details">
                 <ion-nav-view class="stable-bg" name="tab-tab1">
-                    <ion-content class="bottom-sticked" style="padding-top:15px;">
+                    <ion-content class="bottom-sticked">
 
                         <ion-slide-box ng-click="showImagePickerModal()">
-                            <ion-slide ng-repeat="image in menu.images" style="background-image: url('{{image.$value}}');">
+                            <ion-slide ng-repeat="image in menu.images" style="background-image: url('{{image}}');">
                             </ion-slide>
                         </ion-slide-box>
 
 
-                        <div class="control-picker">
+                        <div class="control-picker" style="margin-top: 20px;">
                             <div class="item-label fw-medium dark">
                                 Price per diner
                             </div>

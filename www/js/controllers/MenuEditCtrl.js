@@ -1,8 +1,14 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicModal', '$ionicLoading', '$cordovaImagePicker', 'ImageEncoder', 'Image', 'ImageUploadService', function MenuEditCtrl($scope, $state, Auth, Menu, $ionicModal, $ionicLoading, $cordovaImagePicker, ImageEncoder, Image, ImageUploadService) {
+kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicModal', '$ionicLoading', '$ionicActionSheet', '$cordovaImagePicker', 'Image', 'ImageUploadService', '$ionicSlideBoxDelegate', function MenuEditCtrl($scope, $state, Auth, Menu, $ionicModal, $ionicLoading, $ionicActionSheet, $cordovaImagePicker, Image, ImageUploadService, $ionicSlideBoxDelegate) {
 
+    $ionicLoading.show({
+        template: 'Loading...'
+    });
+
+    var imagesToUpload;
+    var actionSheet;
     var options = {
         maximumImagesCount: 10,
         width: 800,
@@ -12,35 +18,6 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
 
     $scope.images = [];
 
-    $scope.loadImages = function () {
-        for (var i = 0; i < 0; i++) {
-            $scope.images.push({
-                id: i,
-                src: "http://placehold.it/50x50"
-            });
-        }
-    }
-
-    $scope.uploadImages = function () {
-
-        if (window.cordova) {
-            $cordovaImagePicker.getPictures(options).then(function (results) {
-                for (var i = 0; i < results.length; i++) {
-                    $scope.images.push({
-                        id: i,
-                        src: results[i]
-                    });
-                    //$scope.$apply();
-                }
-            }, function (error) {
-                console.log(error);
-            });
-        }
-    }
-
-    $ionicLoading.show({
-        template: 'Loading...'
-    });
 
     $scope.min = {
         price: 1,
@@ -52,30 +29,40 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         guests: 100
     }
 
+    $scope.uploadImages = function () {
+
+        if (window.cordova) {
+            $cordovaImagePicker.getPictures(options).then(function (results) {
+                for (var i = 0; i < results.length; i++) {
+                    $scope.images.push(results[i]);
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        }
+    }
+
     Menu.get(Auth.user.uid).then(function (menu) {
         if (menu.price) {
 
-            ///Image.all(Auth.user.uid).then(function (images) {
+            Image.all(Auth.user.uid).then(function (images) {
 
-            $scope.menu = {
-                price: menu.price,
-                min: menu.min,
-                max: menu.max,
-                starter: menu.starter,
-                main: menu.main,
-                dessert: menu.dessert,
-                beverage: menu.beverage,
-                //images: images
-            }
+                $scope.menu = {
+                    price: menu.price,
+                    min: menu.min,
+                    max: menu.max,
+                    starter: menu.starter,
+                    main: menu.main,
+                    dessert: menu.dessert,
+                    beverage: menu.beverage,
+                    images: images.map(function (image) {
+                        return image.$value;
+                    })
+                }
 
-            console.log($scope.menu);
-
-            $scope.$watch('menu.min', function (newValue) {
-                console.log(newValue);
+                $ionicSlideBoxDelegate.update();
+                $ionicLoading.hide();
             });
-
-            $ionicLoading.hide();
-            //});
 
         } else {
             $ionicLoading.show({
@@ -116,6 +103,12 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
 
         }
 
+        $scope.confirmImages = function () {
+            $scope.menu.images = $scope.images;
+            $ionicSlideBoxDelegate.update();
+            $scope.hideImagePickerModal();
+        }
+
         $ionicModal.fromTemplateUrl('templates/modals/image_picker.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -124,6 +117,7 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         });
 
         $scope.showImagePickerModal = function () {
+            $scope.images = $scope.menu.images;
             $scope.imagePicker.show();
         };
 
@@ -135,9 +129,30 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
             //$scope.user.city = '';
         });
 
+        $scope.deleteImageConfirm = function () {
+            actionSheet = $ionicActionSheet.show({
+                destructiveText: 'Delete',
+                titleText: 'Delete image?',
+                cancelText: 'Cancel',
+                cancel: function () {
+                    actionSheet();
+                },
+                destructiveButtonClicked: function () {
+                    //Image.delete().then(function(){
+                        actionSheet();
+                    //});
+                }
+            });
+        }
+
+
         $scope.save = function () {
 
-            ImageUploadService($scope.images).then(function (images) {
+            imagesToUpload = $scope.menu.images.filter(function (image) {
+                if (image.indexOf('http') == -1) return image;
+            });
+
+            ImageUploadService(imagesToUpload).then(function (images) {
 
                 $ionicLoading.show({
                     template: 'Saving changes...'
@@ -153,19 +168,32 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
                     beverage: $scope.menu.beverage
                 }).then(function () {
 
-                    var i = 1;
-                    angular.forEach(images, function (value, key) {
-                        Image.create(Auth.user.uid, value.url).then(function () {
-                            if (i === images.length)
-                                $ionicLoading.hide();
-                            i++;
-                        });
-                    });
+                    if (images.length) {
+                        var i = 1;
+                        angular.forEach(images, function (value, key) {
+                            Image.create(Auth.user.uid, value.url).then(function () {
+                                if (i === images.length) {
+                                    Image.all(Auth.user.uid).then(function (images) {
+                                        $scope.menu.images = images.map(function (image) {
+                                            return image.$value;
+                                        })
+                                        $ionicSlideBoxDelegate.update();
+                                        $ionicLoading.hide();
+                                    });
+                                }
 
+                                i++;
+                            });
+                        });
+
+                    } else {
+                        $ionicLoading.hide();
+                    }
                 });
-                
-            }).then(function(error){
-                console.log(error);
+
+            }).then(function (error) {
+                if (error)
+                    console.log(error);
             });
         }
     });

@@ -7,9 +7,7 @@
     <ion-content ng-class="{'bottom-sticked-thin' : $parent.userID != $parent.cookID}">
 
         <ion-slide-box>
-            <ion-slide style="background-image: url(img/food2.jpg);">
-            </ion-slide>
-            <ion-slide style="background-image: url(img/food3.jpg);">
+            <ion-slide ng-repeat="image in menu.images" style="background-image: url('{{image}}');">
             </ion-slide>
         </ion-slide-box>
 

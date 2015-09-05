@@ -10,14 +10,19 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
 
     var ImageUploadService = function (images) {
 
+        console.log(images);
+
         var deferred = $q.defer();
         var fileSize;
         var percentage;
         var responses = [];
 
         function startProcess(imageIndex) {
-            
+
             var imageURI = images[imageIndex];
+
+            console.log('*** startProcess ***');
+            console.log(imageURI);
 
             window.resolveLocalFileSystemURL(imageURI, function (fileEntry) {
                 // Find out how big the original file is
@@ -25,7 +30,7 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
                     fileSize = fileObj.size;
                     // Display a loading indicator reporting the start of the upload
                     $ionicLoading.show({
-                        template: 'Uploading Picture '+(imageIndex + 1) +'/'+ images.length +' : ' + 0 + '%'
+                        template: 'Uploading Picture ' + (imageIndex + 1) + '/' + images.length + ' : ' + 0 + '%'
                     });
                     // Trigger the upload
                     uploadFile(imageIndex);
@@ -34,7 +39,10 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
         }
 
         function uploadFile(imageIndex) {
-            
+
+            console.log('*** uploadFile ***');
+            console.log(imageIndex);
+
             var imageURI = images[imageIndex];
             // Add the Cloudinary "upload preset" name to the headers
             var uploadOptions = {
@@ -42,25 +50,26 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
                     'upload_preset': CLOUDINARY_CONFIGS.UPLOAD_PRESET
                 }
             };
+
             $cordovaFileTransfer
             // Your Cloudinary URL will go here
                 .upload(CLOUDINARY_CONFIGS.API_URL, imageURI, uploadOptions)
 
             .then(function (result) {
-                // Let the user know the upload is completed
-                /*$ionicLoading.show({
-                    template: 'Upload Completed',
-                    duration: 1000
-                });*/
+                console.log('*** success ***');
+                console.log(result);
+
                 // Result has a "response" property that is escaped
                 // FYI: The result will also have URLs for any new images generated with 
                 // eager transformations
                 var response = JSON.parse(decodeURIComponent(result.response));
-                
-                if(imageIndex + 1 < images.length){
-                    responses.push(response);
-                    startProcess(imageIndex++);
-                }else{
+                var next = imageIndex + 1;
+
+                responses.push(response);
+
+                if (next < images.length) {
+                    startProcess(next);
+                } else {
                     deferred.resolve(responses);
                 }
             }, function (err) {
@@ -77,12 +86,16 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
                 percentage = Math.floor(progress.loaded / fileSize * 100);
                 $ionicLoading.show({
                     //template: 'Uploading Picture : ' + percentage + '%'
-                    template: 'Uploading Picture '+(imageIndex + 1) +'/'+ images.length +' : ' + percentage + '%'
+                    template: 'Uploading Picture ' + (imageIndex + 1) + '/' + images.length + ' : ' + percentage + '%'
                 });
             });
         }
-        
-        startProcess(0);
+
+        if (images.length > 0) {
+            startProcess(0);
+        } else {
+            deferred.resolve([]);
+        }
 
         return deferred.promise;
     }
