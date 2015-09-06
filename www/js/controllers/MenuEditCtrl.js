@@ -16,8 +16,10 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         quality: 80
     };
 
+    
+    $scope.isSelected = 0;
+    
     $scope.images = [];
-
 
     $scope.min = {
         price: 1,
@@ -34,12 +36,20 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         if (window.cordova) {
             $cordovaImagePicker.getPictures(options).then(function (results) {
                 for (var i = 0; i < results.length; i++) {
-                    $scope.images.push(results[i]);
+                    $scope.images.push({
+                        id: 'temp' + Math.floor((Math.random() * 1000) + 1),
+                        src: results[i]
+                    });
                 }
             }, function (error) {
                 console.log(error);
             });
         }
+    }
+
+    $scope.selectImage = function (index) {
+        $scope.images[index].selected = !$scope.images[index].selected;
+        $scope.images[index].selected? $scope.isSelected++ : $scope.isSelected--;
     }
 
     Menu.get(Auth.user.uid).then(function (menu) {
@@ -56,7 +66,10 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
                     dessert: menu.dessert,
                     beverage: menu.beverage,
                     images: images.map(function (image) {
-                        return image.$value;
+                        return {
+                            id: image.$id,
+                            src: image.$value,
+                        }
                     })
                 }
 
@@ -130,6 +143,7 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
         });
 
         $scope.deleteImageConfirm = function () {
+
             actionSheet = $ionicActionSheet.show({
                 destructiveText: 'Delete',
                 titleText: 'Delete image?',
@@ -138,18 +152,33 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
                     actionSheet();
                 },
                 destructiveButtonClicked: function () {
-                    //Image.delete().then(function(){
-                        actionSheet();
-                    //});
+                    actionSheet();
+                    $ionicLoading.show({
+                        template: 'Deleting images...'
+                    });
+                    var activeImages = [];
+                    angular.forEach($scope.images, function (image, index) {
+                        if (image.selected) {
+                            if (image.src.indexOf('temp') == -1) {
+                                Image.delete(Auth.user.uid, image.id);
+                            }
+                        } else {
+                            activeImages.push(image);
+                        }
+                    });
+                    
+                    $scope.images = activeImages;
+                    
+                    $ionicLoading.hide();
                 }
             });
         }
 
 
         $scope.save = function () {
-
+            
             imagesToUpload = $scope.menu.images.filter(function (image) {
-                if (image.indexOf('http') == -1) return image;
+                return image.src.indexOf('http') == -1;
             });
 
             ImageUploadService(imagesToUpload).then(function (images) {
@@ -175,8 +204,11 @@ kitchsy.controller('MenuEditCtrl', ['$scope', '$state', 'Auth', 'Menu', '$ionicM
                                 if (i === images.length) {
                                     Image.all(Auth.user.uid).then(function (images) {
                                         $scope.menu.images = images.map(function (image) {
-                                            return image.$value;
-                                        })
+                                            return {
+                                                id: image.$id,
+                                                src: image.$value,
+                                            }
+                                        });
                                         $ionicSlideBoxDelegate.update();
                                         $ionicLoading.hide();
                                     });

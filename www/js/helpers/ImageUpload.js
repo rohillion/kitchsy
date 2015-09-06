@@ -19,7 +19,7 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
 
         function startProcess(imageIndex) {
 
-            var imageURI = images[imageIndex];
+            var imageURI = images[imageIndex].src;
 
             console.log('*** startProcess ***');
             console.log(imageURI);
@@ -43,7 +43,7 @@ kitchsy.factory('ImageUploadService', function ($q, $ionicLoading, $cordovaFileT
             console.log('*** uploadFile ***');
             console.log(imageIndex);
 
-            var imageURI = images[imageIndex];
+            var imageURI = images[imageIndex].src;
             // Add the Cloudinary "upload preset" name to the headers
             var uploadOptions = {
                 params: {

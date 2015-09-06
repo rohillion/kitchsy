@@ -36,9 +36,11 @@ kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'momen
 
                             $scope.title = 'Eat ' + category.toLocaleLowerCase() + ' with ' + profile.name;
                             $scope.menu = menu;
-                            $scope.menu.images = images.map(function (image) {
-                                return image.$value;
-                            });
+                            $scope.menu.images = false;
+                            if (images.length > 0)
+                                $scope.menu.images = images.map(function (image) {
+                                    return image.$value;
+                                });
 
                             $ionicSlideBoxDelegate.update();
                             $ionicLoading.hide();

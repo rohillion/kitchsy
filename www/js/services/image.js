@@ -17,24 +17,10 @@ kitchsy.factory('Image', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL', '
         create: function (userId, src) {
             return $firebaseArray(ref.child('images').child(userId)).$add(src);
         },
-        get: function (imageID) {
-
-            return $q(function (resolve, reject) {
-
-                var profile = localStorageService.get(userID);
-                if (!profile) {
-                    $firebaseObject(ref.child('profiles').child(userID)).$loaded(function (profile) {
-                        Profile.set(userID, profile);
-                        resolve(profile);
-                    });
-                } else {
-                    resolve(profile);
-                }
+        delete: function (userId, imageId) {
+            return $firebaseArray(ref.child('images').child(userId)).$loaded(function (images) {
+                return images.$remove(images.$indexFor(imageId));
             });
-
-        },
-        delete: function (userId, image) {
-            return $firebaseArray(ref.child('images').child(userId)).$remove(image);
         }
     };
 

@@ -319,3 +319,15 @@ h6,
 .pac-container {
     pointer-events: all;
 }
+
+#menuEditView .slider {
+    background-color: #f1f1f1;
+    background-image: url('../img/upload.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 50px;
+}
+
+#thumbnails .selected-thumb img{
+    opacity: 0.6;
+}
