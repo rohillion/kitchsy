@@ -11,9 +11,12 @@ kitchsy.controller('ScheduleEditCtrl', ['$scope', 'Schedule', 'moment', 'Auth', 
     $ionicLoading.show({
         template: 'Loading...'
     });
-
+    
     var days = [
         {
+            id: 0,
+            name: 'SUNDAY'
+        }, { 
             id: 1,
             name: 'MONDAY'
         }, {
@@ -31,9 +34,6 @@ kitchsy.controller('ScheduleEditCtrl', ['$scope', 'Schedule', 'moment', 'Auth', 
         }, {
             id: 6,
             name: 'SATURDAY'
-        }, {
-            id: 7,
-            name: 'SUNDAY'
         }
     ];
     

@@ -6,7 +6,7 @@
     <ion-content>
 
         <div collection-repeat="day in $parent.days" class="item item-toggle">
-            {{day.name}}
+            <p translate="{{day.name}}"></p>
             <label class="toggle">
                 <input type="checkbox" ng-change="updateSchedule(day)" ng-model="day.on">
                 <div class="track">

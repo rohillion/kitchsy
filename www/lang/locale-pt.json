@@ -3,5 +3,24 @@
     "MY_PROFILE": "Meu Perfil",
     "MY_BOOKING": "Minhas Reservas",
     "CHANGE_LANG": "Trocar Idioma",
-    "LOGOUT": "Encerrar Sessão"
+    "LOGOUT": "Encerrar Sessão",
+    
+    "BRAZILIAN_FOOD": "Culinária Brasileira",
+    "CELIAC": "Culinária Gluten Free",
+    "DESSERTS": "Sobremesas",
+    "MEXICAN_FOOD": "Culinária Mexicana",
+    "PASTA": "Massas",
+    "PIZZA": "Pizza",
+    "SUSHI": "Sushi",
+    "VEGAN": "Vegano",
+    "VEGETARIAN": "Vegetariano",
+    "TAPAS": "Petiscos",
+    
+    "MONDAY": "Segunda-Feira", 
+    "TUESDAY": "Terça-Feira",  
+    "WEDNESDAY": "Quarta-Feira",
+    "THURSDAY": "Quinta-Feira",
+    "FRIDAY": "Sexta-Feira",
+    "SATURDAY": "Sábado",
+    "SUNDAY": "Domingo"
 }

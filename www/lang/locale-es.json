@@ -4,6 +4,7 @@
     "MY_BOOKING": "Mis Reservas",
     "CHANGE_LANG": "Cambiar Idioma",
     "LOGOUT": "Cerrar Sesion",
+    
     "BRAZILIAN_FOOD": "Comida Brasilera",
     "CELIAC": "Celiacos",
     "DESSERTS": "Postres",
@@ -13,5 +14,13 @@
     "SUSHI": "Sushi",
     "VEGAN": "Vegano",
     "VEGETARIAN": "Vegetariano",
-    "TAPAS": "Tapas"
+    "TAPAS": "Tapas",
+    
+    "MONDAY": "Lunes", 
+    "TUESDAY": "Martes",  
+    "WEDNESDAY": "Miércules",
+    "THURSDAY": "Jueves",
+    "FRIDAY": "Viernes",
+    "SATURDAY": "Sábado",
+    "SUNDAY": "Domingo"
 }

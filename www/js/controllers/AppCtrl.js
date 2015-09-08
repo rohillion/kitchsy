@@ -17,7 +17,6 @@ kitchsy.controller('AppCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$tran
     $scope.lang = function () 
     {
         // Change Language
-        //$translate.use($translate.use() === 'en' ? 'es' : 'en');   
         switch ($translate.use()) 
         {
             case 'en' :
