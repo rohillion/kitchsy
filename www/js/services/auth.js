@@ -1,8 +1,8 @@
 /*global kitchsy */
 'use strict';
 
-kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', 'FIREBASE_URL', '$location', '$ionicHistory', function ($firebaseObject, $firebaseArray, $firebaseAuth, FIREBASE_URL, $location, $ionicHistory) {
-    
+kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', 'FIREBASE_URL', '$location', '$ionicHistory', '$cordovaOauth', function ($firebaseObject, $firebaseArray, $firebaseAuth, FIREBASE_URL, $location, $ionicHistory, $cordovaOauth) {
+
     var ref = new Firebase(FIREBASE_URL);
     var auth = $firebaseAuth(ref);
 
@@ -12,7 +12,13 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
         },
         login: function (user) {
             //return auth.$authWithPassword(user);
-            return auth.$authWithPassword({email:'b@b.com',password:'123'});
+            //return auth.$authWithPassword({email:'b@b.com',password:'123'});
+            return $cordovaOauth.facebook("1052091691467996", ["email"]).then(function (result) {
+                console.log(result);
+                return auth.$authWithOAuthToken("facebook", result.access_token);
+            }, function (error) {
+                console.log("ERROR: " + error);
+            });
         },
         logout: function () {
             auth.$unauth();
