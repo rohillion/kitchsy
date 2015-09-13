@@ -20,6 +20,12 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
+    "com.phonegap.plugins.facebookconnect",
+    "com.synconset.imagepicker",
+    "cordova-plugin-file",
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-globalization",
+    "cordova-plugin-inappbrowser",
     "com.ionic.keyboard"
   ],
   "cordovaPlatforms": [
