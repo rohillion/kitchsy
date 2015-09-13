@@ -1,7 +1,7 @@
 /*global kitchsy */
 'use strict';
 
-kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', 'FIREBASE_URL', '$location', '$ionicHistory', '$cordovaOauth', function ($firebaseObject, $firebaseArray, $firebaseAuth, FIREBASE_URL, $location, $ionicHistory, $cordovaOauth) {
+kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', 'FIREBASE_URL', '$location', '$ionicHistory', '$cordovaOauth', '$q', function ($firebaseObject, $firebaseArray, $firebaseAuth, FIREBASE_URL, $location, $ionicHistory, $cordovaOauth, $q) {
 
     var ref = new Firebase(FIREBASE_URL);
     var auth = $firebaseAuth(ref);
@@ -11,14 +11,45 @@ kitchsy.factory('Auth', ['$firebaseObject', '$firebaseArray', '$firebaseAuth', '
             return auth.$createUser(user);
         },
         login: function (user) {
-            //return auth.$authWithPassword(user);
-            //return auth.$authWithPassword({email:'b@b.com',password:'123'});
-            return $cordovaOauth.facebook("1052091691467996", ["email"]).then(function (result) {
+            return auth.$authWithPassword(user);
+            return auth.$authWithPassword({
+                email: 'b@b.com',
+                password: '123'
+            });
+        },
+        fblogin: function (user) {
+            
+            return $q(function (resolve, reject) {
+                facebookConnectPlugin.login(['email'], function (status) {
+                    facebookConnectPlugin.getAccessToken(function (token) {
+                        // Authenticate with Facebook using an existing OAuth 2.0 access token
+                        return auth.$authWithOAuthToken("facebook", token).then(function (authData, error) {
+                            if (error) {
+                                console.log("Login Failed!", error);
+                                reject(error);
+                            } else {
+                                console.log("Authenticated successfully with payload:", authData);
+                                resolve(authData);
+                            }
+                        }, {
+                            remember: "default"
+                        });
+                    }, function (error) {
+                        console.log('Could not get access token', error);
+                        reject(error);
+                    });
+                }, function (error) {
+                    console.log('An error occurred logging the user in', error);
+                    reject(error);
+                });
+            });
+
+            /*return $cordovaOauth.facebook("1052091691467996", ["email"]).then(function (result) {
                 console.log(result);
                 return auth.$authWithOAuthToken("facebook", result.access_token);
             }, function (error) {
                 console.log("ERROR: " + error);
-            });
+            });*/
         },
         logout: function () {
             auth.$unauth();

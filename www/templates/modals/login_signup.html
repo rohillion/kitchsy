@@ -12,6 +12,11 @@
             <ion-slide class="padding">
                 <form ng-submit="login()">
                     <div class="list">
+                        <label class="item">
+                            <button class="button button-block button-positive" ng-click="fblogin()" type="button">
+                                Login with Facebook
+                            </button>
+                        </label>
                         <label class="item item-input">
                             <span class="input-label">Email</span>
                             <input type="email" ng-model="user.email">
@@ -23,12 +28,10 @@
                         <label class="item">
                             <button class="button button-block button-positive" type="submit">Login</button>
                         </label>
-                        <label class="item">
-                            <button class="button button-block button-positive" ng-click="login()" type="button">Facebook Login</button>
-                        </label>
-                        <div class="item item-input">
+
+                        <!--<div class="item item-input">
                             <a ng-click="loginSignupModalSlider.slide(1)">Signup</a>
-                        </div>
+                        </div>-->
                     </div>
                 </form>
             </ion-slide>
@@ -36,6 +39,11 @@
             <ion-slide class="padding">
                 <form ng-submit="signup()">
                     <div class="list">
+                        <label class="item">
+                            <button class="button button-block button-positive" ng-click="fblogin()" type="button">
+                                Signup with Facebook
+                            </button>
+                        </label>
                         <label class="item item-input">
                             <span class="input-label">City</span>
                             <input type="text" ng-model="user.city">
@@ -51,9 +59,9 @@
                         <label class="item">
                             <button class="button button-block button-positive" type="submit">Signup</button>
                         </label>
-                        <div class="item item-input">
+                        <!--<div class="item item-input">
                             <a ng-click="loginSignupModalSlider.slide(0)">Login</a>
-                        </div>
+                        </div>-->
                     </div>
                 </form>
             </ion-slide>

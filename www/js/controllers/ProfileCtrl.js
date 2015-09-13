@@ -21,14 +21,14 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
         $scope.categories = categories;
 
         Profile.get(Auth.user.uid).then(function (profile) {
-            $ionicLoading.hide();
             $scope.profile = profile;
             $scope.profile.category = $scope.categories.$getRecord(profile.category);
 
-            $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.name != undefined);
+            $scope.showMenuButton = $ionicSideMenuDelegate.canDragContent(profile.username != undefined);
             $ionicHistory.nextViewOptions({
                 disableBack: !$scope.showMenuButton
             });
+            $ionicLoading.hide();
         });
     });
 
@@ -46,9 +46,11 @@ kitchsy.controller('ProfileCtrl', ['$scope', '$ionicModal', 'moment', 'Auth', '$
             id: Auth.user.uid,
             name: $scope.profile.name,
             username: $scope.profile.username,
-            isChef: $scope.profile.isChef,
-            category: $scope.profile.category.$id,
+            isChef: $scope.profile.isChef
         }
+        
+        if($scope.profile.category)
+            input.category = $scope.profile.category.$id;
 
         $ionicLoading.show({
             template: 'Saving...',

@@ -14,24 +14,37 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
 
 
     var Profile = {
-        all: function(categoryID){
+        all: function (categoryID) {
             return $firebaseArray(ref.child('profiles').orderByChild("category").equalTo(categoryID)).$loaded();
         },
         create: function (user) {
-            Profile.set(user.uid, user);
-            return ref.child('profiles').child(user.uid).set(user);
+            
+            return $q(function (resolve, reject) {
+                
+                var profile = ref.child('profiles').child(user.uid);
+
+                return profile.set(user, function (error) {
+                    if (error) {
+                        console.log('Synchronization failed');
+                        reject('Synchronization failed');
+                    } else {
+                        Profile.set(user.uid, user);
+                        console.log('Synchronization succeeded');
+                        resolve(user);
+                    }
+                });
+            });
         },
         edit: function (input) {
             var profile = ref.child('profiles').child(input.id);
 
             return $q(function (resolve, reject) {
-                
+
                 return profile.update(input, function (error) {
                     if (error) {
                         console.log('Synchronization failed');
                         reject('Synchronization failed');
-                    } 
-                    else {
+                    } else {
                         Profile.set(input.id, input);
                         console.log('Synchronization succeeded');
                         resolve(input);
@@ -41,8 +54,8 @@ kitchsy.factory('Profile', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
             });
         },
         get: function (userID, fromServer) {
-            
-            if(fromServer)
+
+            if (fromServer)
                 return $firebaseObject(ref.child('profiles').child(userID)).$loaded();
 
             return $q(function (resolve, reject) {
