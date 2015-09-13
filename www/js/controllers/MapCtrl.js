@@ -131,7 +131,7 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
 
         Menu.get(profile.id).then(function (menu) {
             $scope.menu = menu;
-            $scope.attendes = menu.min;
+            $scope.attendees = menu.min;
         });
 
     });

@@ -1,15 +1,42 @@
 <ion-modal-view>
     
     <ion-header-bar>
-        <h3 class="title">Confirm Booking</h3>
+        <h3 class="title">Confirm Request Booking</h3>
         <button class="button button-icon button-clear ion-ios-close-empty" ng-click="hideConfirmation()">
         </button>
     </ion-header-bar>
 
     <ion-content>
         <div class="list">
-
             
+            <br />
+            
+            <h4 class="booking-title dark fw-bold">{{ $parent.title }}</h4>
+            
+            <div class="course-box">
+                <h5 class="booking-title dark fw-bold">Date</h5>
+                <p class="soft-dark text-centered">{{ $parent.booking.date | date:'dd - MMMM - yyyy' }}</p>
+            </div>
+            
+            <div class="course-box" ng-if="$parent.booking.position.address != null">
+                <h5 class="booking-title dark fw-bold">Place</h5>
+                <p class="soft-dark text-centered">{{ $parent.booking.position.address }}</p>
+            </div>
+            
+            <div class="course-box">
+                <h5 class="booking-title dark fw-bold">Attendees</h5>
+                <p class="soft-dark text-centered">{{ $parent.booking.attendees }}</p>
+            </div>
+
+            <div class="course-box">
+                <h5 class="booking-title dark fw-bold">Price per person</h5>
+                <p class="soft-dark text-centered">{{ $parent.booking.price }}€</p>
+            </div>
+            
+            <div class="course-box">
+                <h5 class="booking-title dark fw-bold">Total Price</h5>
+                <p class="soft-dark text-centered">{{ $parent.booking.price * $parent.booking.attendees }}€</p>
+            </div>
 
         </div>
     </ion-content>

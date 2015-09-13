@@ -1,7 +1,7 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking', 'CookBooking', 'ClientBooking', function BookCtrl($scope, $state, $stateParams, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking) {
+kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking', 'CookBooking', 'ClientBooking', 'Category', function BookCtrl($scope, $state, $stateParams, $translate, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking, Category) {
 
     $ionicLoading.show({
         template: 'Loading...'
@@ -10,7 +10,6 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
     $scope.placeApi = {
         place: {}
     };
-    
     
     $scope.mapLoaded = false;
 
@@ -21,25 +20,33 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'Pro
             console.log(change);
             if (change.geometry) {
                 $scope.booking.position = {
+                    address: change.formatted_address,
                     lat: change.geometry.location.lat(),
                     lng: change.geometry.location.lng()
                 }
             }
         });
-
-        Profile.get($stateParams.profileID).then(function (profile) {
-
-            Menu.get(profile.id).then(function (menu) {
-                console.log($scope.placeApi.place.geometry);
-                $scope.menu = menu;
-                $scope.booking.attendes = menu.min;
-                $ionicLoading.hide();
+        
+        Category.all().then(function (categories) 
+        {  
+            Profile.get($stateParams.profileID).then(function (profile) 
+            {
+                $translate(categories.$getRecord(profile.category).$value).then(function (category) 
+                {
+                    Menu.get(profile.id).then(function (menu) 
+                    {
+                        console.log($scope.placeApi.place.geometry);
+                        $scope.title = 'Eat ' + category.toLocaleLowerCase() + ' with ' + profile.name;
+                        $scope.menu = menu;
+                        $scope.booking.attendees = menu.min;
+                        $scope.booking.price = menu.price;
+                        $ionicLoading.hide();
+                    });
+                });
             });
-
         });
-
     });
-
+    
     $scope.booking = {
         cookId: $stateParams.profileID,
         clientId: Auth.user.uid,
