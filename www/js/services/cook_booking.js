@@ -15,7 +15,7 @@ kitchsy.factory('CookBooking', ['$firebaseArray', '$firebaseObject', 'FIREBASE_U
     var CookBooking = {
         all: function (userId) {
             if (userId)
-                return $firebaseArray(cookBookings.orderByChild("user").equalTo(userId)).$loaded();
+                return $firebaseArray(cookBookings.child(userId)).$loaded();
             return $firebaseArray(cookBookings).$loaded();
         },
         create: function (cookBooking) {

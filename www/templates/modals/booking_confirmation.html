@@ -15,7 +15,7 @@
             
             <div class="course-box">
                 <h5 class="booking-title dark fw-bold">Date</h5>
-                <p class="soft-dark text-centered">{{ $parent.booking.date | date:'dd - MMMM - yyyy' }}</p>
+                <p class="soft-dark text-centered">{{ $parent.date | date:'dd - MMMM - yyyy' }}</p>
             </div>
             
             <div class="course-box" ng-if="$parent.booking.position.address != null">
