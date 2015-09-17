@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule', 'uiGmapgoogle-maps', 'ionic-datepicker', 'ion-google-place', 'ngCordovaOauth']);
+var kitchsy = angular.module('kitchsy', ['ionic', 'firebase', 'ngCookies', 'ngCordova', 'angular.filter', 'pascalprecht.translate', 'LocalStorageModule', 'uiGmapgoogle-maps', 'ionic-datepicker', 'ionic-ratings', 'ion-google-place', 'ngCordovaOauth']);
 
 kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ionicPlatform, $rootScope, $location, Auth) {
         $ionicPlatform.ready(function () {
@@ -171,6 +171,7 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
         $urlRouterProvider.otherwise('/app/cooks');
 
             }])
+    .constant('DATEFORMAT', 'YYYYMMDD')
     .constant('moment', moment)
     .constant('CLOUDINARY_CONFIGS', {
         API_URL: 'https://api.cloudinary.com/v1_1/kitchsy/image/upload',

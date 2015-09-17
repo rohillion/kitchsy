@@ -17,6 +17,7 @@
     "firebase": "~2.2.8",
     "ion-google-place": "~0.0.1",
     "ionic-datepicker": "~0.9.0",
+    "ionic-ratings": "~0.2.0",
     "moment": "~2.10.6",
     "ng-cordova-oauth": "~0.1.4",
     "ngCordova": "~0.1.17-alpha"

@@ -1,12 +1,13 @@
 /*global kitchsy*/
 'use strict';
 
-kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate', 'moment', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking', 'CookBooking', 'ClientBooking', 'Category', function BookCtrl($scope, $state, $stateParams, $translate, moment, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking, Category) {
+kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate', 'moment', 'Auth', 'Profile', '$ionicModal', '$ionicLoading', 'uiGmapGoogleMapApi', 'Menu', 'Booking', 'CookBooking', 'ClientBooking', 'Category', 'DATEFORMAT', function BookCtrl($scope, $state, $stateParams, $translate, moment, Auth, Profile, $ionicModal, $ionicLoading, uiGmapGoogleMapApi, Menu, Booking, CookBooking, ClientBooking, Category, DATEFORMAT) {
 
     $ionicLoading.show({
         template: 'Loading...'
     });
 
+    $scope.unavailableDates = [];
     $scope.placeApi = {
         place: {}
     };
@@ -33,9 +34,14 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate'
                 $translate(categories.$getRecord(profile.category).$value).then(function (category) {
 
                     Menu.get(profile.id).then(function (menu) {
-                        console.log(profile.id);
+                        
                         CookBooking.all(profile.id).then(function (cookBookings) {
-                            console.log(cookBookings);
+
+                            $scope.unavailableDates = cookBookings.map(function (booking) {
+                                return moment(booking.date, DATEFORMAT).toDate();
+                            });
+                            initCalendar();
+                            
                             $scope.title = 'Eat ' + category.toLocaleLowerCase() + ' with ' + profile.name;
                             $scope.menu = menu;
                             $scope.booking.attendees = menu.min;
@@ -52,32 +58,31 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate'
         cookId: $stateParams.profileID,
         clientId: Auth.user.uid
     }
-    
-    $scope.date = new Date();
-    $scope.datepickerObject = {
-        titleLabel: 'Select a date', //Optional
-        todayLabel: 'Today', //Optional
-        closeLabel: 'Close', //Optional
-        setLabel: 'Select', //Optional
-        setButtonType: 'button-assertive', //Optional
-        todayButtonType: 'button-assertive', //Optional
-        closeButtonType: 'button-assertive', //Optional
-        inputDate: $scope.date, //Optional
-        mondayFirst: true, //Optional
-        disabledDates: [
-                new Date(2015, 8, 16),
-                new Date(2015, 8, 17),
-            ], //Optional
-        templateType: 'modal', //Optional
-        modalHeaderColor: 'bar-calm', //Optional
-        modalFooterColor: 'bar-calm', //Optional
-        from: new Date(), //Optional
-        to: new Date(2015, 9, 1), //Optional
-        callback: function (val) { //Mandatory
-            $scope.date = new Date(val);
-        }
-    };
 
+    var initCalendar = function () {
+        $scope.date = new Date();
+        $scope.datepickerObject = {
+            titleLabel: 'Select a date', //Optional
+            todayLabel: 'Today', //Optional
+            closeLabel: 'Close', //Optional
+            setLabel: 'Select', //Optional
+            setButtonType: 'button-assertive', //Optional
+            todayButtonType: 'button-assertive', //Optional
+            closeButtonType: 'button-assertive', //Optional
+            inputDate: $scope.date, //Optional
+            mondayFirst: true, //Optional
+            disabledDates: $scope.unavailableDates,
+            templateType: 'modal', //Optional
+            modalHeaderColor: 'bar-calm', //Optional
+            modalFooterColor: 'bar-calm', //Optional
+            from: new Date(), //Optional
+            //to: new Date(2015, 9, 1), //Optional
+            callback: function (val) { //Mandatory
+                $scope.date = new Date(val);
+            }
+        };
+    }
+    
     $ionicModal.fromTemplateUrl('templates/modals/booking_confirmation.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -103,18 +108,24 @@ kitchsy.controller('BookCtrl', ['$scope', '$state', '$stateParams', '$translate'
             template: 'Booking...'
         });
 
-        $scope.booking.date = moment($scope.date).format();
+        $scope.booking.date = moment($scope.date).format(DATEFORMAT);
 
         Booking.create($scope.booking).then(function (booking) {
 
             CookBooking.create({
                 user: $scope.booking.cookId,
-                booking: booking.key()
+                booking: {
+                    id: booking.key(),
+                    date: $scope.booking.date
+                }
             });
 
             ClientBooking.create({
                 user: $scope.booking.clientId,
-                booking: booking.key()
+                booking: {
+                    id: booking.key(),
+                    date: $scope.booking.date
+                }
             });
 
             $ionicLoading.hide();

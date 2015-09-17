@@ -331,3 +331,7 @@ h6,
 #thumbnails .selected-thumb img{
     opacity: 0.6;
 }
+
+.cook-rating{
+    text-align: center;
+}

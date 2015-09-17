@@ -15,7 +15,9 @@
             <h3 class="booking-title dark">{{$parent.title}}</h3>
 
             <div class="cook-rating">
-                {{$parent.stars}} stars
+                <ionic-ratings ng-if="ratingsObject" ratingsobj='ratingsObject'></ionic-ratings>
+                <p ng-if="ratingsObject">{{votes}} votes</p>
+                <p ng-if="!ratingsObject">No rating yet</p>
             </div>
 
             <div class="avatar-pic">

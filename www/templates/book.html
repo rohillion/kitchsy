@@ -9,7 +9,7 @@
 
             <div class="padding">
                 <div class="controls shadow">
-                    <ionic-datepicker input-obj="datepickerObject">
+                    <ionic-datepicker ng-if="datepickerObject" input-obj="datepickerObject">
                         <div class="input-group">
                             <label class="form-control">{{$parent.date | date:'dd - MMMM - yyyy'}}</label>
                         </div>

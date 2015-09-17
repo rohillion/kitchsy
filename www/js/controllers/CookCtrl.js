@@ -9,6 +9,7 @@
 kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'moment', 'Auth', '$translate', 'Profile', 'Review', '$stateParams', '$state', 'Menu', 'Category', 'Image', '$ionicSlideBoxDelegate', function CookCtrl($scope, $ionicModal, $ionicLoading, moment, Auth, $translate, Profile, Review, $stateParams, $state, Menu, Category, Image, $ionicSlideBoxDelegate) {
 
     $scope.stars = 0;
+    $scope.votes = 0;
     $scope.cookID = $stateParams.profileID;
     $scope.userID = Auth.user.uid;
 
@@ -22,14 +23,20 @@ kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'momen
 
             Review.get(profile.id).then(function (reviews) {
 
-                angular.forEach(reviews, function (value, key) {
-                    $scope.stars = $scope.stars + value.stars;
-                });
+                if (reviews.length > 0) {
+                    var stars = 0;
+                    angular.forEach(reviews, function (value, key) {
+                        stars = stars + value.stars;
+                    });
 
-                $scope.stars = $scope.stars / reviews.length;
+                    $scope.stars = Math.round (stars / reviews.length);
+                    $scope.votes = reviews.length;
+                    initRating();
+                }
+
 
                 $translate(categories.$getRecord(profile.category).$value).then(function (category) {
-                    console.log(profile);
+
                     Menu.get(profile.id).then(function (menu) {
 
                         Image.all($stateParams.profileID).then(function (images) {
@@ -52,6 +59,19 @@ kitchsy.controller('CookCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'momen
 
         });
     });
+
+    var initRating = function () {
+        $scope.ratingsObject = {
+            iconOn: 'ion-ios-star',
+            iconOff: 'ion-ios-star-outline',
+            iconOnColor: '#FFC107',
+            iconOffColor: '#FFC107',
+            rating: $scope.stars,
+            minRating: 5,
+            callback: function (rating) {
+            }
+        };
+    }
 
     $scope.book = function () {
         $state.go('app.book', {
