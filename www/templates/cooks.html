@@ -4,10 +4,17 @@
         <button class="button button-icon button-clear ion-android-funnel" ng-click="showFilters()"></button>
     </ion-nav-buttons>
 
-    <ion-content>
+    <ion-content class="cook-list">
 
         <div class="item-list">
-            <a collection-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}" class="item">{{profile.name}} -  {{profile.reviews.length}} Reviews</a>
+            <a class="item-presentation" ng-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}">
+                <div class="presentation-background" style="background-image: url('http://res.cloudinary.com/kitchsy/image/upload/v1441540666/nkqjormmjmkauw99uefj.jpg');"></div>
+                <div class="item item-avatar">
+                    <img class="item-image" src="img/avatar.jpg">
+                    <h2>{{profile.name}}</h2>
+                    <p>{{profile.reviews.length}} Reviews</p>
+                </div>
+            </a>
         </div>
 
     </ion-content>

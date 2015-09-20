@@ -1,10 +1,11 @@
 {
-    "CHANGE_CITY": "Buscar Cozinheiros",
+    "FIND_COOK": "Buscar Cozinheiros",
     "MY_PROFILE": "Meu Perfil",
     "MY_BOOKING": "Minhas Reservas",
+    "MY_AGENDA": "Minha Agenda",
     "CHANGE_LANG": "Trocar Idioma",
     "LOGOUT": "Encerrar Sessão",
-    
+
     "BRAZILIAN_FOOD": "Culinária Brasileira",
     "CELIAC": "Culinária Gluten Free",
     "DESSERTS": "Sobremesas",
@@ -16,7 +17,7 @@
     "VEGETARIAN": "Vegetariano",
     "TAPAS": "Petiscos",
     "RISOTTO": "Risoto",
-    
+
     "MONDAY": "Segunda-Feira", 
     "TUESDAY": "Terça-Feira",  
     "WEDNESDAY": "Quarta-Feira",

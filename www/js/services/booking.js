@@ -42,10 +42,10 @@ kitchsy.factory('Booking', ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
 
             });
         },
-        get: function (userID, fromServer) {
+        get: function (bookingID, fromServer) {
 
             if (fromServer)
-                return $firebaseObject(ref.child('bookings').child(userID)).$loaded();
+                return $firebaseObject(ref.child('bookings').child(bookingID)).$loaded();
 
             return $q(function (resolve, reject) {
 

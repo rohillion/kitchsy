@@ -69,6 +69,7 @@ h6,
 
 .tabs {
     /*box-shadow: 0 0 20px 10px #f8f8f8;*/
+    
     background-image: none;
 }
 
@@ -328,10 +329,28 @@ h6,
     background-size: 50px;
 }
 
-#thumbnails .selected-thumb img{
+#thumbnails .selected-thumb img {
     opacity: 0.6;
 }
 
-.cook-rating{
+.cook-rating {
     text-align: center;
+}
+
+.cook-list .item {
+    border-top: none;
+}
+
+.item-presentation {
+    text-decoration: none;
+    display: block;
+}
+
+.presentation-background {
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    background-size: cover;
+    /* -webkit-filter: grayscale(65%); */
+    height: 170px;
+    width: 100%;
 }

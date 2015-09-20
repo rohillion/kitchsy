@@ -1,4 +1,4 @@
-<ion-view view-title="My Booking">
+<ion-view view-title="My Agenda">
 
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
@@ -8,7 +8,7 @@
         <ion-list>
             <ion-item class="item item-avatar" collection-repeat="booking in $parent.bookings">
                 <img src="img/avatar.jpg">
-                <h2>{{booking.cook_name}}</h2>
+                <h2>{{booking.client_name}}</h2>
                 <p>{{booking.date}}</p>
                 <ion-option-button class="button-assertive">
                     Delete

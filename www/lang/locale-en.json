@@ -1,7 +1,8 @@
 {
-    "CHANGE_CITY": "Find a Cook",
+    "FIND_COOK": "Find a Cook",
     "MY_PROFILE": "My Profile",
     "MY_BOOKING": "My Bookings",
+    "MY_AGENDA": "My Agenda",
     "CHANGE_LANG": "Change Language",
     "LOGOUT": "Logout",
 

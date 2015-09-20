@@ -119,6 +119,19 @@ kitchsy.run(['$ionicPlatform', '$rootScope', '$location', 'Auth', function ($ion
                 }
             }
         })
+        
+        .state('app.my_agenda', {
+            url: "/my_agenda",
+            access: {
+                requiresLogin: true,
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/my_agenda.html",
+                    controller: 'MyAgendaListCtrl',
+                }
+            }
+        })
 
         .state('app.schedule_edit', {
             url: "/schedule_edit",
