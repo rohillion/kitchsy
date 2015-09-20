@@ -8,7 +8,9 @@
 
         <div class="item-list">
             <a class="item-presentation" ng-repeat="profile in $parent.profiles" ng-href="#app/cook/{{profile.$id}}">
-                <div class="presentation-background" style="background-image: url('http://res.cloudinary.com/kitchsy/image/upload/v1441540666/nkqjormmjmkauw99uefj.jpg');"></div>
+                <div class="presentation-background" style="background-image: url('http://res.cloudinary.com/kitchsy/image/upload/v1441540666/nkqjormmjmkauw99uefj.jpg');">
+                    <div class="price-tag">$25</div>
+                </div>
                 <div class="item item-avatar">
                     <img class="item-image" src="img/avatar.jpg">
                     <h2>{{profile.name}}</h2>

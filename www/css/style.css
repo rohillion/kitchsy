@@ -347,10 +347,23 @@ h6,
 }
 
 .presentation-background {
+    position: relative;
     background-repeat: no-repeat;
     background-position: center center fixed;
     background-size: cover;
     /* -webkit-filter: grayscale(65%); */
     height: 170px;
     width: 100%;
+}
+
+.price-tag {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    background-color: #000;
+    padding: 3px 8px;
+    opacity: 0.7;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
 }
